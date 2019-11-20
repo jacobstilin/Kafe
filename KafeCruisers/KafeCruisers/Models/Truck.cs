@@ -14,7 +14,7 @@ namespace KafeCruisers.Models
 
         [ForeignKey("Location")]
         public int LocationId { get; set; }
-        public Location location { get; set; }
+        public Location Location { get; set; }
 
         public int StartTime { get; set; }
 

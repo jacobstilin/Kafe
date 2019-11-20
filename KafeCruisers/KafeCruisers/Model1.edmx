@@ -1,0 +1,1458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KafeCruisers.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Creamers">
+          <Key>
+            <PropertyRef Name="CreamerId" />
+          </Key>
+          <Property Name="CreamerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OnePercentMilk" Type="int" Nullable="false" />
+          <Property Name="TwoPercentMilk" Type="int" Nullable="false" />
+          <Property Name="CoconutMilk" Type="int" Nullable="false" />
+          <Property Name="Cream" Type="int" Nullable="false" />
+          <Property Name="HeavyCream" Type="int" Nullable="false" />
+          <Property Name="SkimMilk" Type="int" Nullable="false" />
+          <Property Name="SoyMilk" Type="int" Nullable="false" />
+          <Property Name="AlmondMilk" Type="int" Nullable="false" />
+          <Property Name="WholeMilk" Type="int" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="lastName" Type="nvarchar(max)" />
+          <Property Name="ApplicationId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Drizzles">
+          <Key>
+            <PropertyRef Name="DrizzleId" />
+          </Key>
+          <Property Name="DrizzleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaramelDrizzle" Type="bit" Nullable="false" />
+          <Property Name="ChocolateDrizzle" Type="bit" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="lastName" Type="nvarchar(max)" />
+          <Property Name="ApplicationId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Latitude" Type="float" />
+        </EntityType>
+        <EntityType Name="MenuItems">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar(max)" />
+          <Property Name="TruckId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Size" Type="nvarchar(max)" />
+          <Property Name="Room" Type="bit" Nullable="false" />
+          <Property Name="Decaf" Type="bit" Nullable="false" />
+          <Property Name="Iced" Type="bit" Nullable="false" />
+          <Property Name="Temperature" Type="nvarchar(max)" />
+          <Property Name="WhippedCream" Type="bit" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UniqueId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="FillTime" Type="datetime" />
+          <Property Name="TruckId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Powders">
+          <Key>
+            <PropertyRef Name="PowderId" />
+          </Key>
+          <Property Name="PowderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChocolatePowder" Type="bit" Nullable="false" />
+          <Property Name="CinnamonPowder" Type="bit" Nullable="false" />
+          <Property Name="VanillaPoweer" Type="bit" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sauces">
+          <Key>
+            <PropertyRef Name="SauceId" />
+          </Key>
+          <Property Name="SauceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MochaSauce" Type="int" Nullable="false" />
+          <Property Name="CaramelSauce" Type="int" Nullable="false" />
+          <Property Name="PumpkinSauce" Type="int" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shots">
+          <Key>
+            <PropertyRef Name="ShotId" />
+          </Key>
+          <Property Name="ShotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StandardShots" Type="int" Nullable="false" />
+          <Property Name="DecafShots" Type="int" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sweeteners">
+          <Key>
+            <PropertyRef Name="SweeterId" />
+          </Key>
+          <Property Name="SweeterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Honey" Type="int" Nullable="false" />
+          <Property Name="SugarInTheRaw" Type="int" Nullable="false" />
+          <Property Name="Sugar" Type="int" Nullable="false" />
+          <Property Name="Splenda" Type="int" Nullable="false" />
+          <Property Name="Equal" Type="int" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Syrups">
+          <Key>
+            <PropertyRef Name="SyrupId" />
+          </Key>
+          <Property Name="SyrupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaramelSyrup" Type="int" Nullable="false" />
+          <Property Name="ChocolateSyrup" Type="int" Nullable="false" />
+          <Property Name="PeppermintSyrup" Type="int" Nullable="false" />
+          <Property Name="VanillaSyrup" Type="int" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Toppings">
+          <Key>
+            <PropertyRef Name="ToppingsId" />
+          </Key>
+          <Property Name="ToppingsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PumpkinSpice" Type="bit" Nullable="false" />
+          <Property Name="SeaSalt" Type="bit" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trucks">
+          <Key>
+            <PropertyRef Name="TruckId" />
+          </Key>
+          <Property Name="TruckId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="int" Nullable="false" />
+          <Property Name="EndTime" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Creamers_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Creamers" Type="Self.Creamers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Creamers">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Customers_dbo_AspNetUsers_ApplicationId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Drizzles_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drizzles" Type="Self.Drizzles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Drizzles">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_AspNetUsers_ApplicationId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MenuItems_dbo_Menus_MenuId">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Menus_dbo_Trucks_TruckId">
+          <End Role="Trucks" Type="Self.Trucks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trucks">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Trucks_TruckId">
+          <End Role="Trucks" Type="Self.Trucks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trucks">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Powders_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Powders" Type="Self.Powders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Powders">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sauces_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sauces" Type="Self.Sauces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Sauces">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Shots_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shots" Type="Self.Shots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Shots">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sweeteners" Type="Self.Sweeteners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Sweeteners">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Syrups_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Syrups" Type="Self.Syrups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Syrups">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Toppings_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Toppings" Type="Self.Toppings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Toppings">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trucks_dbo_Locations_LocationId">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Trucks" Type="Self.Trucks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Trucks">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KafeCruisersModelsStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Creamers" EntityType="Self.Creamers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drizzles" EntityType="Self.Drizzles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Powders" EntityType="Self.Powders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sauces" EntityType="Self.Sauces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shots" EntityType="Self.Shots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sweeteners" EntityType="Self.Sweeteners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Syrups" EntityType="Self.Syrups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Toppings" EntityType="Self.Toppings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trucks" EntityType="Self.Trucks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Creamers_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Creamers_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Creamers" EntitySet="Creamers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_AspNetUsers_ApplicationId" Association="Self.FK_dbo_Customers_dbo_AspNetUsers_ApplicationId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Drizzles_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Drizzles_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Drizzles" EntitySet="Drizzles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_AspNetUsers_ApplicationId" Association="Self.FK_dbo_Employees_dbo_AspNetUsers_ApplicationId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MenuItems_dbo_Menus_MenuId" Association="Self.FK_dbo_MenuItems_dbo_Menus_MenuId">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Menus_dbo_Trucks_TruckId" Association="Self.FK_dbo_Menus_dbo_Trucks_TruckId">
+            <End Role="Trucks" EntitySet="Trucks" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Orders_OrderId" Association="Self.FK_dbo_OrderItems_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Customers_CustomerId" Association="Self.FK_dbo_Orders_dbo_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Trucks_TruckId" Association="Self.FK_dbo_Orders_dbo_Trucks_TruckId">
+            <End Role="Trucks" EntitySet="Trucks" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Powders_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Powders_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Powders" EntitySet="Powders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sauces_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Sauces_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Sauces" EntitySet="Sauces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Shots_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Shots_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Shots" EntitySet="Shots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Sweeteners" EntitySet="Sweeteners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Syrups_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Syrups_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Syrups" EntitySet="Syrups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Toppings_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Toppings_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Toppings" EntitySet="Toppings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trucks_dbo_Locations_LocationId" Association="Self.FK_dbo_Trucks_dbo_Locations_LocationId">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Trucks" EntitySet="Trucks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KafeCruisers.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_dbo_Customers_dbo_AspNetUsers_ApplicationId" FromRole="AspNetUsers" ToRole="Customers" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_Employees_dbo_AspNetUsers_ApplicationId" FromRole="AspNetUsers" ToRole="Employees" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Creamer">
+          <Key>
+            <PropertyRef Name="CreamerId" />
+          </Key>
+          <Property Name="CreamerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OnePercentMilk" Type="Int32" Nullable="false" />
+          <Property Name="TwoPercentMilk" Type="Int32" Nullable="false" />
+          <Property Name="CoconutMilk" Type="Int32" Nullable="false" />
+          <Property Name="Cream" Type="Int32" Nullable="false" />
+          <Property Name="HeavyCream" Type="Int32" Nullable="false" />
+          <Property Name="SkimMilk" Type="Int32" Nullable="false" />
+          <Property Name="SoyMilk" Type="Int32" Nullable="false" />
+          <Property Name="AlmondMilk" Type="Int32" Nullable="false" />
+          <Property Name="WholeMilk" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Creamers_dbo_OrderItems_OrderItemId" FromRole="Creamers" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Customers_dbo_AspNetUsers_ApplicationId" FromRole="Customers" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Customers_CustomerId" FromRole="Customers" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Drizzle">
+          <Key>
+            <PropertyRef Name="DrizzleId" />
+          </Key>
+          <Property Name="DrizzleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaramelDrizzle" Type="Boolean" Nullable="false" />
+          <Property Name="ChocolateDrizzle" Type="Boolean" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Drizzles_dbo_OrderItems_OrderItemId" FromRole="Drizzles" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Employees_dbo_AspNetUsers_ApplicationId" FromRole="Employees" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Latitude" Type="Double" />
+          <NavigationProperty Name="Trucks" Relationship="Self.FK_dbo_Trucks_dbo_Locations_LocationId" FromRole="Locations" ToRole="Trucks" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_dbo_MenuItems_dbo_Menus_MenuId" FromRole="MenuItems" ToRole="Menus" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TruckId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.FK_dbo_MenuItems_dbo_Menus_MenuId" FromRole="Menus" ToRole="MenuItems" />
+          <NavigationProperty Name="Truck" Relationship="Self.FK_dbo_Menus_dbo_Trucks_TruckId" FromRole="Menus" ToRole="Trucks" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Room" Type="Boolean" Nullable="false" />
+          <Property Name="Decaf" Type="Boolean" Nullable="false" />
+          <Property Name="Iced" Type="Boolean" Nullable="false" />
+          <Property Name="Temperature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WhippedCream" Type="Boolean" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Creamers" Relationship="Self.FK_dbo_Creamers_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Creamers" />
+          <NavigationProperty Name="Drizzles" Relationship="Self.FK_dbo_Drizzles_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Drizzles" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_OrderItems_dbo_Orders_OrderId" FromRole="OrderItems" ToRole="Orders" />
+          <NavigationProperty Name="Powders" Relationship="Self.FK_dbo_Powders_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Powders" />
+          <NavigationProperty Name="Sauces" Relationship="Self.FK_dbo_Sauces_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Sauces" />
+          <NavigationProperty Name="Shots" Relationship="Self.FK_dbo_Shots_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Shots" />
+          <NavigationProperty Name="Sweeteners" Relationship="Self.FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Sweeteners" />
+          <NavigationProperty Name="Syrups" Relationship="Self.FK_dbo_Syrups_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Syrups" />
+          <NavigationProperty Name="Toppings" Relationship="Self.FK_dbo_Toppings_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="Toppings" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniqueId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="FillTime" Type="DateTime" Precision="3" />
+          <Property Name="TruckId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Orders_dbo_Customers_CustomerId" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK_dbo_OrderItems_dbo_Orders_OrderId" FromRole="Orders" ToRole="OrderItems" />
+          <NavigationProperty Name="Truck" Relationship="Self.FK_dbo_Orders_dbo_Trucks_TruckId" FromRole="Orders" ToRole="Trucks" />
+        </EntityType>
+        <EntityType Name="Powder">
+          <Key>
+            <PropertyRef Name="PowderId" />
+          </Key>
+          <Property Name="PowderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChocolatePowder" Type="Boolean" Nullable="false" />
+          <Property Name="CinnamonPowder" Type="Boolean" Nullable="false" />
+          <Property Name="VanillaPoweer" Type="Boolean" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Powders_dbo_OrderItems_OrderItemId" FromRole="Powders" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Sauce">
+          <Key>
+            <PropertyRef Name="SauceId" />
+          </Key>
+          <Property Name="SauceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MochaSauce" Type="Int32" Nullable="false" />
+          <Property Name="CaramelSauce" Type="Int32" Nullable="false" />
+          <Property Name="PumpkinSauce" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Sauces_dbo_OrderItems_OrderItemId" FromRole="Sauces" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Shot">
+          <Key>
+            <PropertyRef Name="ShotId" />
+          </Key>
+          <Property Name="ShotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StandardShots" Type="Int32" Nullable="false" />
+          <Property Name="DecafShots" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Shots_dbo_OrderItems_OrderItemId" FromRole="Shots" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Sweetener">
+          <Key>
+            <PropertyRef Name="SweeterId" />
+          </Key>
+          <Property Name="SweeterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Honey" Type="Int32" Nullable="false" />
+          <Property Name="SugarInTheRaw" Type="Int32" Nullable="false" />
+          <Property Name="Sugar" Type="Int32" Nullable="false" />
+          <Property Name="Splenda" Type="Int32" Nullable="false" />
+          <Property Name="Equal" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId" FromRole="Sweeteners" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Syrup">
+          <Key>
+            <PropertyRef Name="SyrupId" />
+          </Key>
+          <Property Name="SyrupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaramelSyrup" Type="Int32" Nullable="false" />
+          <Property Name="ChocolateSyrup" Type="Int32" Nullable="false" />
+          <Property Name="PeppermintSyrup" Type="Int32" Nullable="false" />
+          <Property Name="VanillaSyrup" Type="Int32" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Syrups_dbo_OrderItems_OrderItemId" FromRole="Syrups" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Topping">
+          <Key>
+            <PropertyRef Name="ToppingsId" />
+          </Key>
+          <Property Name="ToppingsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PumpkinSpice" Type="Boolean" Nullable="false" />
+          <Property Name="SeaSalt" Type="Boolean" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_Toppings_dbo_OrderItems_OrderItemId" FromRole="Toppings" ToRole="OrderItems" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckId" />
+          </Key>
+          <Property Name="TruckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Int32" Nullable="false" />
+          <Property Name="EndTime" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_dbo_Trucks_dbo_Locations_LocationId" FromRole="Trucks" ToRole="Locations" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_dbo_Menus_dbo_Trucks_TruckId" FromRole="Trucks" ToRole="Menus" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Trucks_TruckId" FromRole="Trucks" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Customers_dbo_AspNetUsers_ApplicationId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_AspNetUsers_ApplicationId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Creamers_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Creamers" Type="Self.Creamer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Creamers">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Drizzles_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drizzles" Type="Self.Drizzle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Drizzles">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trucks_dbo_Locations_LocationId">
+          <End Role="Locations" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Trucks" Type="Self.Truck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Trucks">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MenuItems_dbo_Menus_MenuId">
+          <End Role="Menus" Type="Self.Menu" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MenuItems" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="MenuItems">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Menus_dbo_Trucks_TruckId">
+          <End Role="Trucks" Type="Self.Truck" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trucks">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Powders_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Powders" Type="Self.Powder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Powders">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sauces_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sauces" Type="Self.Sauce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Sauces">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Shots_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shots" Type="Self.Shot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Shots">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sweeteners" Type="Self.Sweetener" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Sweeteners">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Syrups_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Syrups" Type="Self.Syrup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Syrups">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Toppings_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Toppings" Type="Self.Topping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="Toppings">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Trucks_TruckId">
+          <End Role="Trucks" Type="Self.Truck" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trucks">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Creamers" EntityType="Self.Creamer" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Drizzles" EntityType="Self.Drizzle" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Powders" EntityType="Self.Powder" />
+          <EntitySet Name="Sauces" EntityType="Self.Sauce" />
+          <EntitySet Name="Shots" EntityType="Self.Shot" />
+          <EntitySet Name="Sweeteners" EntityType="Self.Sweetener" />
+          <EntitySet Name="Syrups" EntityType="Self.Syrup" />
+          <EntitySet Name="Toppings" EntityType="Self.Topping" />
+          <EntitySet Name="Trucks" EntityType="Self.Truck" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_AspNetUsers_ApplicationId" Association="Self.FK_dbo_Customers_dbo_AspNetUsers_ApplicationId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_AspNetUsers_ApplicationId" Association="Self.FK_dbo_Employees_dbo_AspNetUsers_ApplicationId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Creamers_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Creamers_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Creamers" EntitySet="Creamers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Customers_CustomerId" Association="Self.FK_dbo_Orders_dbo_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Drizzles_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Drizzles_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Drizzles" EntitySet="Drizzles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trucks_dbo_Locations_LocationId" Association="Self.FK_dbo_Trucks_dbo_Locations_LocationId">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Trucks" EntitySet="Trucks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MenuItems_dbo_Menus_MenuId" Association="Self.FK_dbo_MenuItems_dbo_Menus_MenuId">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Menus_dbo_Trucks_TruckId" Association="Self.FK_dbo_Menus_dbo_Trucks_TruckId">
+            <End Role="Trucks" EntitySet="Trucks" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Orders_OrderId" Association="Self.FK_dbo_OrderItems_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Powders_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Powders_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Powders" EntitySet="Powders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sauces_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Sauces_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Sauces" EntitySet="Sauces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Shots_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Shots_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Shots" EntitySet="Shots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Sweeteners_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Sweeteners" EntitySet="Sweeteners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Syrups_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Syrups_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Syrups" EntitySet="Syrups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Toppings_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_Toppings_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="Toppings" EntitySet="Toppings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Trucks_TruckId" Association="Self.FK_dbo_Orders_dbo_Trucks_TruckId">
+            <End Role="Trucks" EntitySet="Trucks" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KafeCruisersModelsStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Creamers">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Creamer">
+              <MappingFragment StoreEntitySet="Creamers">
+                <ScalarProperty Name="CreamerId" ColumnName="CreamerId" />
+                <ScalarProperty Name="OnePercentMilk" ColumnName="OnePercentMilk" />
+                <ScalarProperty Name="TwoPercentMilk" ColumnName="TwoPercentMilk" />
+                <ScalarProperty Name="CoconutMilk" ColumnName="CoconutMilk" />
+                <ScalarProperty Name="Cream" ColumnName="Cream" />
+                <ScalarProperty Name="HeavyCream" ColumnName="HeavyCream" />
+                <ScalarProperty Name="SkimMilk" ColumnName="SkimMilk" />
+                <ScalarProperty Name="SoyMilk" ColumnName="SoyMilk" />
+                <ScalarProperty Name="AlmondMilk" ColumnName="AlmondMilk" />
+                <ScalarProperty Name="WholeMilk" ColumnName="WholeMilk" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drizzles">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Drizzle">
+              <MappingFragment StoreEntitySet="Drizzles">
+                <ScalarProperty Name="DrizzleId" ColumnName="DrizzleId" />
+                <ScalarProperty Name="CaramelDrizzle" ColumnName="CaramelDrizzle" />
+                <ScalarProperty Name="ChocolateDrizzle" ColumnName="ChocolateDrizzle" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItems">
+                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Menu">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Decaf" ColumnName="Decaf" />
+                <ScalarProperty Name="Iced" ColumnName="Iced" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="WhippedCream" ColumnName="WhippedCream" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="UniqueId" ColumnName="UniqueId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="FillTime" ColumnName="FillTime" />
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Powders">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Powder">
+              <MappingFragment StoreEntitySet="Powders">
+                <ScalarProperty Name="PowderId" ColumnName="PowderId" />
+                <ScalarProperty Name="ChocolatePowder" ColumnName="ChocolatePowder" />
+                <ScalarProperty Name="CinnamonPowder" ColumnName="CinnamonPowder" />
+                <ScalarProperty Name="VanillaPoweer" ColumnName="VanillaPoweer" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sauces">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Sauce">
+              <MappingFragment StoreEntitySet="Sauces">
+                <ScalarProperty Name="SauceId" ColumnName="SauceId" />
+                <ScalarProperty Name="MochaSauce" ColumnName="MochaSauce" />
+                <ScalarProperty Name="CaramelSauce" ColumnName="CaramelSauce" />
+                <ScalarProperty Name="PumpkinSauce" ColumnName="PumpkinSauce" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shots">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Shot">
+              <MappingFragment StoreEntitySet="Shots">
+                <ScalarProperty Name="ShotId" ColumnName="ShotId" />
+                <ScalarProperty Name="StandardShots" ColumnName="StandardShots" />
+                <ScalarProperty Name="DecafShots" ColumnName="DecafShots" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sweeteners">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Sweetener">
+              <MappingFragment StoreEntitySet="Sweeteners">
+                <ScalarProperty Name="SweeterId" ColumnName="SweeterId" />
+                <ScalarProperty Name="Honey" ColumnName="Honey" />
+                <ScalarProperty Name="SugarInTheRaw" ColumnName="SugarInTheRaw" />
+                <ScalarProperty Name="Sugar" ColumnName="Sugar" />
+                <ScalarProperty Name="Splenda" ColumnName="Splenda" />
+                <ScalarProperty Name="Equal" ColumnName="Equal" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Syrups">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Syrup">
+              <MappingFragment StoreEntitySet="Syrups">
+                <ScalarProperty Name="SyrupId" ColumnName="SyrupId" />
+                <ScalarProperty Name="CaramelSyrup" ColumnName="CaramelSyrup" />
+                <ScalarProperty Name="ChocolateSyrup" ColumnName="ChocolateSyrup" />
+                <ScalarProperty Name="PeppermintSyrup" ColumnName="PeppermintSyrup" />
+                <ScalarProperty Name="VanillaSyrup" ColumnName="VanillaSyrup" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toppings">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Topping">
+              <MappingFragment StoreEntitySet="Toppings">
+                <ScalarProperty Name="ToppingsId" ColumnName="ToppingsId" />
+                <ScalarProperty Name="PumpkinSpice" ColumnName="PumpkinSpice" />
+                <ScalarProperty Name="SeaSalt" ColumnName="SeaSalt" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trucks">
+            <EntityTypeMapping TypeName="KafeCruisers.Models.Truck">
+              <MappingFragment StoreEntitySet="Trucks">
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="KafeCruisers.Models.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

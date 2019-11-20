@@ -15,6 +15,7 @@ namespace KafeCruisers.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -68,6 +69,7 @@ namespace KafeCruisers.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            //Login validation needs be figured out. Make sure that the user role is known when landing page is hit
             if (!ModelState.IsValid)
             {
                 return View(model);

@@ -11,9 +11,12 @@ namespace KafeCruisers.Models
     {
         [ForeignKey("Order")]
         public int OrderId { get; set; }
+        public Order Order { get; set; }
 
         [Key]
         public int OrderItemId { get; set; }
+
+        public string ItemName { get; set; }
 
         public string Size { get; set; }
         public bool Room { get; set; }
@@ -28,7 +31,7 @@ namespace KafeCruisers.Models
 
 
 
-        public ICollection<MenuItem> MenuItem { get; set; }
+        
 
         public ICollection<Creamer> Creamers { get; set; }
 

@@ -20,6 +20,22 @@ namespace KafeCruisers.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Menu> Menus { get; set; }
+
+        public DbSet<MenuItem> MenuItems { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<Truck> Trucks { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

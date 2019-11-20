@@ -12,8 +12,10 @@ namespace KafeCruisers.Models
         [Key]
         public int MenuId { get; set; }
 
+        public string MenuName { get; set; }
+
         [ForeignKey("Truck")]
-        public int? TruckId { get; set; }
-        public Truck truck { get; set; }
+        public int TruckId { get; set; }
+        public Truck Truck { get; set; }
     }
 }
