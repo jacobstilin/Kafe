@@ -170,8 +170,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Global.asax.cs">
@@ -260,9 +263,13 @@
     <Content Include="Views\Truck\TruckSelector.cshtml" />
     <Content Include="Views\Order\StartOrder.cshtml" />
     <Content Include="Views\Order\EditOrderItem.cshtml" />
+    <Content Include="Views\Menu\AddMenuItem.cshtml" />
+    <Content Include="Views\Order\EditCreamers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Customer\" />
+    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

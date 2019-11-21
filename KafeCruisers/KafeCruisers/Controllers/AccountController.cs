@@ -166,7 +166,7 @@ namespace KafeCruisers.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     Customer customer = new Customer();
-                    string currentId = User.Identity.GetUserId();
+                    string currentId = user.Id;
                     customer.ApplicationId = currentId;
                     db.Customers.Add(customer);
                     db.SaveChanges();

@@ -27,23 +27,26 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.LocationId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TruckName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.ActionLink("Select This Truck", "Index", "Order", new { id=item.TruckId }, null) 
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Location.LocationId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TruckName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndTime)
+    </td>
+    <td>
+        @Html.ActionLink("Select This Truck", "Index", "Order", new { id = item.TruckId }, null)
+    </td>
+    <td>
+        @Html.ActionLink("Add Menu Item For Truck", "AddMenuItem", "Menu", new { id = item.TruckId }, null)
+    </td>
+</tr>
 }
 
 </table>

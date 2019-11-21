@@ -10,7 +10,7 @@ namespace KafeCruisers.Models
     public class OrderItem
     {
         [ForeignKey("Order")]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
         public Order Order { get; set; }
 
         [Key]

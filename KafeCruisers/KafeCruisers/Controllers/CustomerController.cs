@@ -1,5 +1,4 @@
-﻿using KafeCruisers.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,46 +6,35 @@ using System.Web.Mvc;
 
 namespace KafeCruisers.Controllers
 {
-    public class TruckController : Controller
+    public class CustomerController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Truck
+        // GET: Customer
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Truck/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Truck/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Truck/Create
+        // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(Truck truck)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
-                Truck newTruck = new Truck();
-                newTruck.TruckName = truck.TruckName;
-                Menu menu = new Menu();
-                string newMenuName = (truck.TruckName + "Menu");
-                menu.MenuName = newMenuName;
-                db.Trucks.Add(newTruck);
-                db.SaveChanges();
-                menu.TruckId = newTruck.TruckId;
-                db.Menus.Add(menu);
-                db.SaveChanges();
+                // TODO: Add insert logic here
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -54,28 +42,13 @@ namespace KafeCruisers.Controllers
             }
         }
 
-        public ActionResult TruckSelector()
-        {
-            return View(db.Trucks.ToList());
-        }
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Truck/Edit/5
+        // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Truck/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -91,13 +64,13 @@ namespace KafeCruisers.Controllers
             }
         }
 
-        // GET: Truck/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Truck/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

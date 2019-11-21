@@ -20,6 +20,10 @@ namespace KafeCruisers.Models
 
         public int? OrderTruckId { get; set; }
 
+        public int? CurrentOrderId { get; set; }
+
+        public int? CurrentOrderItemId { get; set; }
+
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

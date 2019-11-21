@@ -12,7 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int OrderId { get; set; }
 
-        public int UniqueId { get; set; }
+        public int? UniqueId { get; set; }
 
         public DateTime? StartTime { get; set; }
 

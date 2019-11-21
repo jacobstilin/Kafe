@@ -18,13 +18,13 @@ namespace KafeCruisers.Controllers
 
         public ActionResult Index(int id)
         {
-            Customer customer = GetLoggedInUser();
+            Customer customer = GetLoggedInCustomer();
             customer.OrderTruckId = id;
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
 
-        public Customer GetLoggedInUser()
+        public Customer GetLoggedInCustomer()
         {
             string currentId = User.Identity.GetUserId();
             Customer customer = db.Customers.FirstOrDefault(u => u.ApplicationId == currentId);
@@ -32,35 +32,48 @@ namespace KafeCruisers.Controllers
         }
 
 
-        // GET: Order/Create
+        
         public ActionResult StartOrder()
         {
-            Customer customer = GetLoggedInUser();
+            Customer customer = GetLoggedInCustomer();
             Order newOrder = new Order();
             newOrder.CustomerId = customer.CustomerId;
             newOrder.TruckId = customer.OrderTruckId;
+            db.Orders.Add(newOrder);
+            db.SaveChanges();
+            customer.CurrentOrderId = newOrder.OrderId;
+            db.SaveChanges();
+            
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
+
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "drink").ToList());
         }
 
         
 
-        // GET: Order/Edit/5
+        // Gets the id of the drink from the view
         public ActionResult EditOrderItem(int id)
         {
+            Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = new OrderItem();
             MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == id);
+            orderItem.OrderId = customer.CurrentOrderId;
             orderItem.ItemName = menuItem.Name;
+            db.OrderItems.Add(orderItem);
+            db.SaveChanges();
+            customer.CurrentOrderItemId = orderItem.OrderItemId;
+            db.SaveChanges();
             return View(orderItem);
         }
 
-        // POST: Order/Edit/5
+        
         [HttpPost]
         public ActionResult EditOrderItem(int id, OrderItem orderItem)
         {
             try
             {
-                OrderItem newOrderItem = new OrderItem();
+                Customer customer = GetLoggedInCustomer();
+                OrderItem newOrderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
                 newOrderItem.Size = orderItem.Size;
                 newOrderItem.Room = orderItem.Room;
                 newOrderItem.Decaf = orderItem.Decaf;
@@ -71,7 +84,9 @@ namespace KafeCruisers.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("EditCreamers", new { id = newOrderItem.OrderItemId });
+
+
+                return RedirectToAction("EditCreamers");
             }
             catch
             {
@@ -80,34 +95,63 @@ namespace KafeCruisers.Controllers
         }
 
 
-        public ActionResult EditCreamers(int id)
+
+        // In this method we must pass the creamer menu items to the view. These items must be added to the DB by app manager I guess
+        public ActionResult EditCreamers()
         {
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderId == id);
-            ICollection<Creamer> creamers = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<MenuItem> creamers = db.MenuItems.Where(m => m.Category == "Creamer").ToList();
             return View(creamers);
 
         }
         
-        /*[HttpPost]
-        public ActionResult EditCreamers(int id, ICollection<Creamer> creamers)
+        [HttpPost]
+        public ActionResult EditCreamers(ICollection<MenuItem> creamers)
         {
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
-            int creamersId = db.Creamers.FirstOrDefault(c => c.OrderItemId == id).CreamerId;
+            Customer customer = GetLoggedInCustomer();
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
 
             for (int i = 0; i < creamers.Count(); i++)
             {
-                var creamerChange = db.Creamers.FirstOrDefault(c => c.CreamerId == creamersId);
-                Creamer setCreamer = creamers.ElementAt(i);
-                creamerChange.OnePercentMilk = creamers.
-
-                    //youre doing this all wrong. each order item does not have a icollection
-                    //it has creamer in it. one creamer model per order item
+                MenuItem setCreamer = creamers.ElementAt(i);
+                Creamer newCreamer = new Creamer();
+                newCreamer.CreamerType = setCreamer.Name;
+                newCreamer.Splashes = setCreamer.Quantity;
+                newCreamer.OrderItemId = orderItem.OrderItemId;
+                db.Creamers.Add(newCreamer);
+                db.SaveChanges();
             }
-        }*/
+            return RedirectToAction("EditShots");
+        }
 
+
+        public ActionResult EditShots()
+        {
+            ICollection<MenuItem> shots = db.MenuItems.Where(m => m.Category == "Shot").ToList();
+            return View(shots);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditShots(ICollection<MenuItem> shots)
+        {
+            Customer customer = GetLoggedInCustomer();
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+
+            for (int i = 0; i < shots.Count(); i++)
+            {
+                MenuItem setShot = shots.ElementAt(i);
+                Shot newShot = new Shot();
+                newShot.ShotType = setShot.Name;
+                newShot.Shots = setShot.Quantity;
+                newShot.OrderItemId = orderItem.OrderItemId;
+                db.Shots.Add(newShot);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
 
         // you stoopid af! tomorrow take these mfs off ya mf'n orderitem model, stooopid!
 
-       
+
     }
 }

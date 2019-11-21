@@ -1,4 +1,5 @@
 ﻿using KafeCruisers.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,75 +8,44 @@ using System.Web.Mvc;
 
 namespace KafeCruisers.Controllers
 {
-    public class TruckController : Controller
+    public class EmployeeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Truck
+        // GET: Employee
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Truck/Details/5
+        // GET: Employee/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Truck/Create
+        // GET: Employee/Create
         public ActionResult Create()
         {
-            return View();
+            Employee newEmployee = new Employee();
+            string AppId = User.Identity.GetUserId();
+            newEmployee.ApplicationId = AppId;
+            db.Employees.Add(newEmployee);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
-        // POST: Truck/Create
-        [HttpPost]
-        public ActionResult Create(Truck truck)
-        {
-            try
-            {
-                Truck newTruck = new Truck();
-                newTruck.TruckName = truck.TruckName;
-                Menu menu = new Menu();
-                string newMenuName = (truck.TruckName + "Menu");
-                menu.MenuName = newMenuName;
-                db.Trucks.Add(newTruck);
-                db.SaveChanges();
-                menu.TruckId = newTruck.TruckId;
-                db.Menus.Add(menu);
-                db.SaveChanges();
+      
+       
+        
 
-                return RedirectToAction("Index", "Home");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult TruckSelector()
-        {
-            return View(db.Trucks.ToList());
-        }
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Truck/Edit/5
+        // GET: Employee/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Truck/Edit/5
+        // POST: Employee/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -91,13 +61,13 @@ namespace KafeCruisers.Controllers
             }
         }
 
-        // GET: Truck/Delete/5
+        // GET: Employee/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Truck/Delete/5
+        // POST: Employee/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

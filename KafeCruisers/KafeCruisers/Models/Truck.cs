@@ -15,7 +15,7 @@ namespace KafeCruisers.Models
         public string TruckName { get; set; }
 
         [ForeignKey("Location")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
         public Location Location { get; set; }
 
         public int? StartTime { get; set; }

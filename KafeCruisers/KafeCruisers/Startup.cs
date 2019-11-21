@@ -30,6 +30,9 @@ namespace KafeCruisers
 
                 //Contact developer for additional app manager sign ins
 
+                
+                
+
                 var user = new ApplicationUser();
                 user.UserName = "guiltyspark@gmail.com";
                 user.Email = "guiltyspark@gmail.com";
