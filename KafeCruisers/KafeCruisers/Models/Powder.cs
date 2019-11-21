@@ -14,6 +14,8 @@ namespace KafeCruisers.Models
 
         public string PowderType { get; set; }
 
+        public int? Scoops { get; set; }
+
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }
 

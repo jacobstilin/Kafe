@@ -265,6 +265,14 @@
     <Content Include="Views\Order\EditOrderItem.cshtml" />
     <Content Include="Views\Menu\AddMenuItem.cshtml" />
     <Content Include="Views\Order\EditCreamers.cshtml" />
+    <Content Include="Views\Order\EditShots.cshtml" />
+    <Content Include="Views\Order\EditSweeteners.cshtml" />
+    <Content Include="Views\Order\EditSauces.cshtml" />
+    <Content Include="Views\Order\EditSyrups.cshtml" />
+    <Content Include="Views\Order\EditDrizzles.cshtml" />
+    <Content Include="Views\Order\EditPowders.cshtml" />
+    <Content Include="Views\Order\EditToppings.cshtml" />
+    <Content Include="Views\Order\ReviewOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

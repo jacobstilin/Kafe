@@ -14,7 +14,7 @@ namespace KafeCruisers.Models
 
         public string SweetenerType { get; set; }
 
-        public int Scoops { get; set; }
+        public int? Scoops { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

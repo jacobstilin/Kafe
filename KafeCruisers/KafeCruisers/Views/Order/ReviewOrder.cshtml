@@ -1,0 +1,100 @@
+﻿@model KafeCruisers.Models.OrderItem
+
+@{
+    ViewBag.Title = "ReviewOrder";
+}
+
+<h2>ReviewOrder</h2>
+
+<div>
+    <h4>OrderItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Decaf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Decaf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Iced)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Iced)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhippedCream)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WhippedCream)
+        </dd>
+
+        @{
+            var creamersList = ViewBag.creamers as ICollection<KafeCruisers.Models.Creamer>;
+
+            for (int i = 0; i < creamersList.Count(); i++)
+            {
+                if (creamersList.ElementAt(i).Splashes != 0)
+                {
+                <dt>
+                    @Html.DisplayNameFor(model => creamersList.ElementAt(i).CreamerType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => creamersList.ElementAt(i).CreamerType)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => creamersList.ElementAt(i).Splashes)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => creamersList.ElementAt(i).Splashes)
+                </dd>
+                    }
+                }
+            }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderItemId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

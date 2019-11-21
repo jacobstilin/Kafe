@@ -14,7 +14,7 @@ namespace KafeCruisers.Models
 
         public string SyrupType { get; set; }
 
-        public int SyrupPumps { get; set; }
+        public int? SyrupPumps { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

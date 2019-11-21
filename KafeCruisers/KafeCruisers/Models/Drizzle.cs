@@ -14,6 +14,7 @@ namespace KafeCruisers.Models
 
         public string DrizzleType { get; set; }
 
+        public int? Drizzles { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

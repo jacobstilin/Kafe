@@ -14,6 +14,8 @@ namespace KafeCruisers.Models
 
         public string ToppingsType { get; set; }
 
+        public int? ToppingsAmmount { get; set; }
+
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }
 

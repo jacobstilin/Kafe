@@ -1,0 +1,61 @@
+﻿@model IList<KafeCruisers.Models.MenuItem>
+
+@{
+    ViewBag.Title = "EditSyrups";
+}
+
+<h2>EditSyrups</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    <h4>Syrup Type</h4>
+                </th>
+                <th>
+                    <h4>Quantity</h4>
+                </th>
+                <th></th>
+            </tr>
+
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Name)
+                        @Html.HiddenFor(modelItem => Model[i].Name)
+                        @Html.HiddenFor(modelItem => Model[i].Category)
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.LabelFor(modelItem => Model[i].Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(modelItem => Model[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(modelItem => Model[i].Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+
+
+            }
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
