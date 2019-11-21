@@ -12,9 +12,9 @@ namespace KafeCruisers.Models
         [Key]
         public int ShotId { get; set; }
 
-        public int StandardShots { get; set; }
+        public string ShotType { get; set; }
 
-        public int DecafShots { get; set; }
+        public int Shots { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

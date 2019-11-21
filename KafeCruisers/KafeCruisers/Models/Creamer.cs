@@ -12,23 +12,9 @@ namespace KafeCruisers.Models
         [Key]
         public int CreamerId { get; set; }
 
-        public int OnePercentMilk { get; set; }
+        public string CreamerType { get; set; }
 
-        public int TwoPercentMilk { get; set; }
-
-        public int CoconutMilk { get; set; }
-
-        public int Cream { get; set; }
-
-        public int HeavyCream { get; set; }
-
-        public int SkimMilk { get; set; }
-
-        public int SoyMilk { get; set; }
-
-        public int AlmondMilk { get; set; }
-
-        public int WholeMilk { get; set; }
+        public int Splashes { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

@@ -12,11 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int PowderId { get; set; }
 
-        public bool ChocolatePowder { get; set; }
-
-        public bool CinnamonPowder { get; set; }
-
-        public bool VanillaPoweer { get; set; }
+        public string PowderType { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

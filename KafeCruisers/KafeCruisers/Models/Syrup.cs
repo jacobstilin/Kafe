@@ -12,13 +12,9 @@ namespace KafeCruisers.Models
         [Key]
         public int SyrupId { get; set; }
 
-        public int CaramelSyrup { get; set; }
+        public string SyrupType { get; set; }
 
-        public int ChocolateSyrup { get; set; }
-
-        public int PeppermintSyrup { get; set; }
-
-        public int VanillaSyrup { get; set; }
+        public int SyrupPumps { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

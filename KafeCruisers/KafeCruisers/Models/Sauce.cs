@@ -13,11 +13,9 @@ namespace KafeCruisers.Models
         [Key]
         public int SauceId { get; set; }
 
-        public int MochaSauce { get; set; }
+        public string SauceType { get; set; }
 
-        public int CaramelSauce { get; set; }
-
-        public int PumpkinSauce { get; set; }
+        public int SaucePumps { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

@@ -18,6 +18,8 @@ namespace KafeCruisers.Models
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
 
+        public int? OrderTruckId { get; set; }
+
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

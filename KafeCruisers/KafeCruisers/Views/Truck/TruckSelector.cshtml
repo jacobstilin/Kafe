@@ -1,0 +1,49 @@
+﻿@model IEnumerable<KafeCruisers.Models.Truck>
+
+@{
+    ViewBag.Title = "TruckSelector";
+}
+
+<h2>TruckSelector</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.LocationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TruckName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.LocationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TruckName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.ActionLink("Select This Truck", "Index", "Order", new { id=item.TruckId }, null) 
+        </td>
+    </tr>
+}
+
+</table>

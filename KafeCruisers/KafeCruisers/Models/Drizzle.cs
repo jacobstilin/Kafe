@@ -12,9 +12,8 @@ namespace KafeCruisers.Models
         [Key]
         public int DrizzleId { get; set; }
 
-        public bool CaramelDrizzle { get; set; }
+        public string DrizzleType { get; set; }
 
-        public bool ChocolateDrizzle { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

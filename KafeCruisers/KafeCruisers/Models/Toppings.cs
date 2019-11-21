@@ -12,9 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int ToppingsId { get; set; }
 
-        public bool PumpkinSpice { get; set; }
-
-        public bool SeaSalt { get; set; }
+        public string ToppingsType { get; set; }
 
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }

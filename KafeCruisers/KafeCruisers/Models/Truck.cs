@@ -12,12 +12,14 @@ namespace KafeCruisers.Models
         [Key]
         public int TruckId { get; set; }
 
+        public string TruckName { get; set; }
+
         [ForeignKey("Location")]
         public int LocationId { get; set; }
         public Location Location { get; set; }
 
-        public int StartTime { get; set; }
+        public int? StartTime { get; set; }
 
-        public int EndTime { get; set; }
+        public int? EndTime { get; set; }
     }
 }

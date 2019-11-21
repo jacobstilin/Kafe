@@ -36,6 +36,22 @@ namespace KafeCruisers.Models
 
         public DbSet<Truck> Trucks { get; set; }
 
+        public DbSet<Creamer> Creamers { get; set; }
+
+        public DbSet<Drizzle> Drizzles { get; set; }
+
+        public DbSet<Powder> Powders { get; set; }
+
+        public DbSet<Sauce> Sauces { get; set; }
+
+        public DbSet<Shot> Shots { get; set; }
+
+        public DbSet<Sweetener> Sweeteners { get; set; }
+
+        public DbSet<Syrup> Syrups { get; set; }
+
+        public DbSet<Toppings> Toppings { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

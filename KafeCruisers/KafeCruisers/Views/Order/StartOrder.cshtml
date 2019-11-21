@@ -1,0 +1,36 @@
+﻿@model IEnumerable<KafeCruisers.Models.MenuItem>
+
+@{
+    ViewBag.Title = "StartOrder";
+}
+
+<h2>StartOrder</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.ActionLink("Select", "EditOrderItem", "Order", new { id=item.MenuItemId }, null)
+            
+        </td>
+    </tr>
+}
+
+</table>
