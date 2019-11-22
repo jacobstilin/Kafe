@@ -45,7 +45,11 @@ namespace KafeCruisers.Controllers
             db.SaveChanges();
             
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
-
+            List<string> sizesList = new List<string>();
+            sizesList.Add("Small");
+            sizesList.Add("Medium");
+            sizesList.Add("Large");
+            ViewBag.sizes = new SelectList(sizesList, "Name", "Name");
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
@@ -54,6 +58,11 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
+            List<string> sizesList = new List<string>();
+            sizesList.Add("Small");
+            sizesList.Add("Medium");
+            sizesList.Add("Large");
+            ViewBag.sizes = new SelectList(sizesList, "Name", "Name");
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
