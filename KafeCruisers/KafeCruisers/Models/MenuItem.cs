@@ -18,6 +18,7 @@ namespace KafeCruisers.Models
 
         public int? Quantity { get; set; }
 
+        public double? Price { get; set; }
 
         [ForeignKey("Menu")]
         public int MenuId { get; set; }

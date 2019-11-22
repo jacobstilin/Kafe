@@ -37,6 +37,15 @@ namespace KafeCruisers.Controllers
             newMenuItem.Category = menuItem.Category;
             newMenuItem.MenuId = menu.MenuId;
 
+            if (menuItem.Price == null)
+            {
+                newMenuItem.Price = 0;
+            }
+            else
+            {
+                newMenuItem.Price = menuItem.Price;
+            }
+
             db.MenuItems.Add(newMenuItem);
             db.SaveChanges();
 

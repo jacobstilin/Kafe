@@ -16,6 +16,8 @@ namespace KafeCruisers.Models
 
         public int? Drizzles { get; set; }
 
+        public double? Price { get; set; }
+
         [ForeignKey("OrderItem")]
         public int OrderItemId { get; set; }
         public OrderItem OrderItem { get; set; }

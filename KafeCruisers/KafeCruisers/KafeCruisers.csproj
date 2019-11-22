@@ -273,6 +273,7 @@
     <Content Include="Views\Order\EditPowders.cshtml" />
     <Content Include="Views\Order\EditToppings.cshtml" />
     <Content Include="Views\Order\ReviewOrder.cshtml" />
+    <Content Include="Views\Order\AdditionalDrink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

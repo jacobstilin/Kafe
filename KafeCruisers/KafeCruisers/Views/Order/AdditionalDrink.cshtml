@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<KafeCruisers.Models.MenuItem>
-
 @{
-    ViewBag.Title = "StartOrder";
+    ViewBag.Title = "AdditionalDrink";
 }
 
-<h2>StartOrder</h2>
-
+<h2>AdditionalDrink</h2>
 
 <table class="table">
     <tr>
@@ -21,7 +19,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.Name)
@@ -37,6 +36,6 @@
 
     </td>
 </tr>
-}
+    }
 
 </table>

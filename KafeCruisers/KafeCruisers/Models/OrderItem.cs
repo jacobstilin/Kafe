@@ -23,11 +23,11 @@ namespace KafeCruisers.Models
 
         public bool Decaf { get; set; }
 
-        public bool Iced { get; set; }
-
         public string Temperature { get; set; }
 
         public bool WhippedCream { get; set; }
+
+        public double? Price { get; set; }
 
 
 

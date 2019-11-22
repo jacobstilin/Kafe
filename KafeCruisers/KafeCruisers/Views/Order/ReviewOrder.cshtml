@@ -44,13 +44,7 @@
             @Html.DisplayFor(model => model.Decaf)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Iced)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Iced)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Temperature)
@@ -66,6 +60,15 @@
 
         <dd>
             @Html.DisplayFor(model => model.WhippedCream)
+        </dd>
+
+        <dt>
+            <h2>Price</h2>
+        </dt>
+
+        <dd>
+            @{  double? price = ViewBag.price; }
+            @Html.DisplayFor(model => price)
         </dd>
 
         @{
@@ -166,11 +169,11 @@
         }
         @{
             var syrupList = ViewBag.syrups as ICollection<KafeCruisers.Models.Syrup>;
-            
-                for (int i = 0; i < syrupList.Count(); i++)
+
+            for (int i = 0; i < syrupList.Count(); i++)
+            {
+                if (syrupList.ElementAt(i).SyrupPumps != null)
                 {
-                    if (syrupList.ElementAt(i).SyrupPumps != null)
-                    {
                     <dt>
                         @Html.DisplayNameFor(model => syrupList.ElementAt(i).SyrupType)
                     </dt>
@@ -185,10 +188,10 @@
                     <dd>
                         @Html.DisplayFor(model => syrupList.ElementAt(i).SyrupPumps)
                     </dd>
-                        }
-                    }
                 }
-            
+            }
+        }
+
         @{
             var drizzleList = ViewBag.drizzles as ICollection<KafeCruisers.Models.Drizzle>;
 
@@ -264,6 +267,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderItemId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Add Another Drink", "StartOrder", "Order")
+    @Html.ActionLink("Proceed", "SelectPickUpTime", "Order")
 </p>
