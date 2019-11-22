@@ -46,7 +46,7 @@ namespace KafeCruisers.Controllers
             
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
 
-            return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "drink").ToList());
+            return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
         
@@ -147,6 +147,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Shot> shotList = new List<Shot>();
 
             for (int i = 0; i < shots.Count(); i++)
             {
@@ -155,9 +156,18 @@ namespace KafeCruisers.Controllers
                 newShot.ShotType = setShot.Name;
                 newShot.Shots = setShot.Quantity;
                 newShot.OrderItemId = orderItem.OrderItemId;
-                db.Shots.Add(newShot);
+
+                shotList.Add(null);
+                shotList[i] = new Shot();
+                shotList[i].ShotType = newShot.ShotType;
+                shotList[i].Shots = newShot.Shots;
+                shotList[i].OrderItemId = newShot.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Shots = shotList;
+
+            db.SaveChanges();
             return RedirectToAction("EditSweeteners");
         }
 
@@ -174,6 +184,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Sweetener> sweetenerList = new List<Sweetener>();
 
             for (int i = 0; i < sweeteners.Count(); i++)
             {
@@ -182,9 +193,18 @@ namespace KafeCruisers.Controllers
                 newSweetener.SweetenerType = setSweetener.Name;
                 newSweetener.Scoops = setSweetener.Quantity;
                 newSweetener.OrderItemId = orderItem.OrderItemId;
-                db.Sweeteners.Add(newSweetener);
+
+                sweetenerList.Add(null);
+                sweetenerList[i] = new Sweetener();
+                sweetenerList[i].SweetenerType = newSweetener.SweetenerType;
+                sweetenerList[i].Scoops = newSweetener.Scoops;
+                sweetenerList[i].OrderItemId = newSweetener.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Sweeteners = sweetenerList;
+
+            db.SaveChanges();
             return RedirectToAction("EditSauces");
         }
 
@@ -202,6 +222,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Sauce> sauceList = new List<Sauce>();
 
             for (int i = 0; i < sauces.Count(); i++)
             {
@@ -210,9 +231,18 @@ namespace KafeCruisers.Controllers
                 newSauce.SauceType = setSauce.Name;
                 newSauce.SaucePumps = setSauce.Quantity;
                 newSauce.OrderItemId = orderItem.OrderItemId;
-                db.Sauces.Add(newSauce);
+
+                sauceList.Add(null);
+                sauceList[i] = new Sauce();
+                sauceList[i].SauceType = newSauce.SauceType;
+                sauceList[i].SaucePumps = newSauce.SaucePumps;
+                sauceList[i].OrderItemId = newSauce.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Sauces = sauceList;
+
+            db.SaveChanges();
             return RedirectToAction("EditSyrups");
         }
 
@@ -230,6 +260,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Syrup> syrupList = new List<Syrup>();
 
             for (int i = 0; i < syrups.Count(); i++)
             {
@@ -238,9 +269,18 @@ namespace KafeCruisers.Controllers
                 newSyrup.SyrupType = setSyrup.Name;
                 newSyrup.SyrupPumps = setSyrup.Quantity;
                 newSyrup.OrderItemId = orderItem.OrderItemId;
-                db.Syrups.Add(newSyrup);
+
+                syrupList.Add(null);
+                syrupList[i] = new Syrup();
+                syrupList[i].SyrupType = newSyrup.SyrupType;
+                syrupList[i].SyrupPumps = newSyrup.SyrupPumps;
+                syrupList[i].OrderItemId = newSyrup.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Syrups = syrupList;
+
+            db.SaveChanges();
             return RedirectToAction("EditDrizzles");
         }
 
@@ -260,6 +300,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Drizzle> drizzleList = new List<Drizzle>();
 
             for (int i = 0; i < drizzles.Count(); i++)
             {
@@ -268,9 +309,18 @@ namespace KafeCruisers.Controllers
                 newDrizzle.DrizzleType = setDrizzle.Name;
                 newDrizzle.Drizzles = setDrizzle.Quantity;
                 newDrizzle.OrderItemId = orderItem.OrderItemId;
-                db.Drizzles.Add(newDrizzle);
+
+                drizzleList.Add(null);
+                drizzleList[i] = new Drizzle();
+                drizzleList[i].DrizzleType = newDrizzle.DrizzleType;
+                drizzleList[i].Drizzles = newDrizzle.Drizzles;
+                drizzleList[i].OrderItemId = newDrizzle.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Drizzles = drizzleList;
+
+            db.SaveChanges();
             return RedirectToAction("EditPowders");
         }
 
@@ -288,6 +338,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Powder> powderList = new List<Powder>();
 
             for (int i = 0; i < powders.Count(); i++)
             {
@@ -296,9 +347,18 @@ namespace KafeCruisers.Controllers
                 newPowder.PowderType = setPowder.Name;
                 newPowder.Scoops = setPowder.Quantity;
                 newPowder.OrderItemId = orderItem.OrderItemId;
-                db.Powders.Add(newPowder);
+
+                powderList.Add(null);
+                powderList[i] = new Powder();
+                powderList[i].PowderType = newPowder.PowderType;
+                powderList[i].Scoops = newPowder.Scoops;
+                powderList[i].OrderItemId = newPowder.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Powders = powderList;
+
+            db.SaveChanges();
             return RedirectToAction("EditToppings");
         }
 
@@ -316,6 +376,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            List<Toppings> toppingsList = new List<Toppings>();
 
             for (int i = 0; i < toppings.Count(); i++)
             {
@@ -324,9 +385,18 @@ namespace KafeCruisers.Controllers
                 newToppings.ToppingsType = setToppings.Name;
                 newToppings.ToppingsAmmount = setToppings.Quantity;
                 newToppings.OrderItemId = orderItem.OrderItemId;
-                db.Toppings.Add(newToppings);
+
+                toppingsList.Add(null);
+                toppingsList[i] = new Toppings();
+                toppingsList[i].ToppingsType = newToppings.ToppingsType;
+                toppingsList[i].ToppingsAmmount = newToppings.ToppingsAmmount;
+                toppingsList[i].OrderItemId = newToppings.OrderItemId;
+
                 db.SaveChanges();
             }
+            orderItem.Toppings = toppingsList;
+
+            db.SaveChanges();
             return RedirectToAction("ReviewOrder");
         }
 
@@ -337,6 +407,20 @@ namespace KafeCruisers.Controllers
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
             ICollection<Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
             ViewBag.creamers = creamerList;
+            ICollection<Drizzle> drizzleList = db.Drizzles.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.drizzles = drizzleList;
+            ICollection<Powder> powderList = db.Powders.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.powders = powderList;
+            ICollection<Sauce> sauceList = db.Sauces.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.sauces = sauceList;
+            ICollection<Shot> shotList = db.Shots.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.shots = shotList;
+            ICollection<Sweetener> sweetenerList = db.Sweeteners.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.sweeteners = sweetenerList;
+            ICollection<Syrup> syrupList = db.Syrups.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.syrups = syrupList;
+            ICollection<Toppings> toppingsList = db.Toppings.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ViewBag.toppings = toppingsList;
             return View(orderItem);
 
         }
@@ -344,7 +428,7 @@ namespace KafeCruisers.Controllers
         public ActionResult TestReviewOrder()
         {
             
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == 19);
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == 21);
             ICollection<Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
             ViewBag.creamers = creamerList;
             return RedirectToAction("ReviewOrder", orderItem);
