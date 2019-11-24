@@ -52,6 +52,8 @@ namespace KafeCruisers.Models
 
         public DbSet<Toppings> Toppings { get; set; }
 
+        public DbSet<Size> Sizes { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

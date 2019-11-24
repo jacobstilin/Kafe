@@ -46,15 +46,48 @@ namespace KafeCruisers.Controllers
                 newMenuItem.Price = menuItem.Price;
             }
 
+            
+            
             db.MenuItems.Add(newMenuItem);
             db.SaveChanges();
 
+            if (menuItem.Category == "Drink")
+            {
+                return RedirectToAction("AddSizes", new { id = newMenuItem.MenuItemId });
+            }
 
             return RedirectToAction("Index", "Home");
-
-
+            
         }
 
+        public ActionResult AddSizes(int id)
+        {
+            MenuItem newMenuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == id);
+            List<Size> sizesList = new List<Size>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                sizesList.Add(null);
+                sizesList[i] = new Size();
+                sizesList[i].MenuItemId = newMenuItem.MenuItemId;
+            }
+            newMenuItem.Sizes = sizesList;
+            db.SaveChanges();
+
+            return View(newMenuItem.Sizes);
+        }
+
+        [HttpPost]
+        public ActionResult AddSizes(ICollection<Size> sizes)
+        {
+            int thisMenuItem = sizes.ElementAt(0).MenuItemId;
+            MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == thisMenuItem);
+           
+            menuItem.Sizes = sizes;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
 
         // GET: Menu
         public ActionResult Index(int id)

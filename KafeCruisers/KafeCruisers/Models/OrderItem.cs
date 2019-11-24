@@ -16,9 +16,14 @@ namespace KafeCruisers.Models
         [Key]
         public int OrderItemId { get; set; }
 
+        public int IdFromMenu { get; set; }
+
         public string ItemName { get; set; }
 
         public string Size { get; set; }
+
+        public double? SizePrice { get; set; }
+
         public bool Room { get; set; }
 
         public bool Decaf { get; set; }

@@ -196,6 +196,7 @@
     <Compile Include="Models\Powder.cs" />
     <Compile Include="Models\Sauce.cs" />
     <Compile Include="Models\Shot.cs" />
+    <Compile Include="Models\Size.cs" />
     <Compile Include="Models\Sweetener.cs" />
     <Compile Include="Models\Syrup.cs" />
     <Compile Include="Models\Toppings.cs" />
@@ -274,6 +275,7 @@
     <Content Include="Views\Order\EditToppings.cshtml" />
     <Content Include="Views\Order\ReviewOrder.cshtml" />
     <Content Include="Views\Order\AdditionalDrink.cshtml" />
+    <Content Include="Views\Menu\AddSizes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

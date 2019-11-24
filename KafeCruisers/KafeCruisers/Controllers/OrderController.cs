@@ -45,11 +45,9 @@ namespace KafeCruisers.Controllers
             db.SaveChanges();
             
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
-            List<string> sizesList = new List<string>();
-            sizesList.Add("Small");
-            sizesList.Add("Medium");
-            sizesList.Add("Large");
-            ViewBag.sizes = new SelectList(sizesList, "Name", "Name");
+
+            
+
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
@@ -58,11 +56,11 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
-            List<string> sizesList = new List<string>();
+            /*List<Select> sizesList = new List<string>();
             sizesList.Add("Small");
             sizesList.Add("Medium");
-            sizesList.Add("Large");
-            ViewBag.sizes = new SelectList(sizesList, "Name", "Name");
+            sizesList.Add("Large");*/
+            // ViewBag.sizes = new SelectList(sizesList, "Name", "Name");
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
@@ -76,10 +74,16 @@ namespace KafeCruisers.Controllers
             orderItem.OrderId = customer.CurrentOrderId;
             orderItem.ItemName = menuItem.Name;
             orderItem.Price = menuItem.Price;
+            orderItem.IdFromMenu = id;
             db.OrderItems.Add(orderItem);
             db.SaveChanges();
             customer.CurrentOrderItemId = orderItem.OrderItemId;
             db.SaveChanges();
+
+            
+            ViewBag.sizes = new SelectList(db.Sizes.Where(s => s.MenuItemId == id && s.SizeName != null).ToList(), "SizeName", "SizeName");
+
+
             return View(orderItem);
         }
 
@@ -96,7 +100,7 @@ namespace KafeCruisers.Controllers
                 newOrderItem.Decaf = orderItem.Decaf;
                 newOrderItem.Temperature = orderItem.Temperature;
                 newOrderItem.WhippedCream = orderItem.WhippedCream;
-
+                
 
                 db.SaveChanges();
 
@@ -469,8 +473,9 @@ namespace KafeCruisers.Controllers
             Customer customer = GetLoggedInCustomer();
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
             double? additionsPrice = 0;
-           
-            
+
+            MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == orderItem.IdFromMenu);
+            double? sizePrice = db.Sizes.FirstOrDefault(s => s.MenuItemId == menuItem.MenuItemId && s.SizeName == orderItem.Size).AdditionalCost;
             
             ICollection <Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
             ViewBag.creamers = creamerList;
@@ -497,7 +502,9 @@ namespace KafeCruisers.Controllers
             ViewBag.toppings = toppingsList;
             foreach (var item in toppingsList) { additionsPrice += item.Price; }
 
+            
             orderItem.Price += additionsPrice;
+            orderItem.Price += sizePrice;
             ViewBag.price = orderItem.Price;
             return View(orderItem);
 
