@@ -1,0 +1,57 @@
+﻿@model IList<KafeCruisers.Models.Temperature>
+@{
+    ViewBag.Title = "AddTemperatures";
+}
+
+<h2>AddTemperatures</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    <h4>Size</h4>
+                </th>
+
+                <th></th>
+            </tr>
+
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(modelItem => Model[i].TemperatureId)
+                        @Html.HiddenFor(modelItem => Model[i].MenuItemId)
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.LabelFor(modelItem => Model[i].TemperatureName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(modelItem => Model[i].TemperatureName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(modelItem => Model[i].TemperatureName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+            }
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+

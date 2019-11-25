@@ -1,13 +1,16 @@
 ﻿@model KafeCruisers.Models.OrderItem
-
 @{
-    ViewBag.Title = "ReviewOrder";
+    ViewBag.Title = "ReviewSelectedItem";
 }
 
-<h2>Review Drink</h2>
+<h2>ReviewSelectedItem</h2>
+
+
+
+
 
 <div>
-    
+
     <hr />
     <dl class="dl-horizontal">
 
@@ -67,7 +70,7 @@
         </dt>
 
         <dd>
-            @{  double? price = ViewBag.price; }
+            @{ double? price = ViewBag.price; }
             @Html.DisplayFor(model => price)
         </dd>
 
@@ -267,8 +270,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Add Another Drink", "AdditionalDrink", "Order")
-</p>
-<p>
-    @Html.ActionLink("Review Items", "ReviewOrderBeforeCheckout", "Order")
+    
+    @Html.ActionLink("Back to Order", "ReviewOrderBeforeCheckout", "Order")
 </p>

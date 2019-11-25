@@ -22,6 +22,8 @@ namespace KafeCruisers.Models
 
         public ICollection<Size> Sizes { get; set; }
 
+        public ICollection<Temperature> Temperatures { get; set; }
+
         [ForeignKey("Menu")]
         public int MenuId { get; set; }
         public Menu Menu { get; set; }

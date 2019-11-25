@@ -86,8 +86,40 @@ namespace KafeCruisers.Controllers
             menuItem.Sizes = sizes;
             db.SaveChanges();
 
+            return RedirectToAction("AddTemperatures", new { id = menuItem.MenuItemId });
+        }
+
+        public ActionResult AddTemperatures(int id)
+        {
+            MenuItem newMenuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == id);
+            List<Temperature> temperaturesList = new List<Temperature>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                temperaturesList.Add(null);
+                temperaturesList[i] = new Temperature();
+                temperaturesList[i].MenuItemId = newMenuItem.MenuItemId;
+            }
+            newMenuItem.Temperatures = temperaturesList;
+            db.SaveChanges();
+
+            return View(newMenuItem.Temperatures);
+        }
+
+        [HttpPost]
+        public ActionResult AddTemperatures(ICollection<Temperature> temperatures)
+        {
+            int thisMenuItem = temperatures.ElementAt(0).MenuItemId;
+            MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == thisMenuItem);
+
+            menuItem.Temperatures = temperatures;
+            db.SaveChanges();
+
             return RedirectToAction("Index", "Home");
         }
+
+
+
 
         // GET: Menu
         public ActionResult Index(int id)

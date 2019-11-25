@@ -18,6 +18,8 @@ namespace KafeCruisers.Models
 
         public DateTime? FillTime { get; set; }
 
+        public double? OrderPrice { get; set;
+        }
         [ForeignKey("Truck")]
         public int? TruckId { get; set; }
         public Truck Truck { get; set; }

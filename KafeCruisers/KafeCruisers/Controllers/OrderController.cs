@@ -46,8 +46,6 @@ namespace KafeCruisers.Controllers
             
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
 
-            
-
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
@@ -56,11 +54,7 @@ namespace KafeCruisers.Controllers
         {
             Customer customer = GetLoggedInCustomer();
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
-            /*List<Select> sizesList = new List<string>();
-            sizesList.Add("Small");
-            sizesList.Add("Medium");
-            sizesList.Add("Large");*/
-            // ViewBag.sizes = new SelectList(sizesList, "Name", "Name");
+            
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
         }
 
@@ -80,7 +74,7 @@ namespace KafeCruisers.Controllers
             customer.CurrentOrderItemId = orderItem.OrderItemId;
             db.SaveChanges();
 
-            
+            ViewBag.temperatures = new SelectList(db.Temperatures.Where(s => s.MenuItemId == id && s.TemperatureName != null).ToList(), "TemperatureName", "TemperatureName");
             ViewBag.sizes = new SelectList(db.Sizes.Where(s => s.MenuItemId == id && s.SizeName != null).ToList(), "SizeName", "SizeName");
 
 
@@ -468,47 +462,112 @@ namespace KafeCruisers.Controllers
         }
 
 
+        // This method takes current OrderItem of logged in customer, compiles total price and gibes additions list to the viewbag
+        // Additional method(s) may be needed for reviewing entire order
+
         public ActionResult ReviewOrder()
         {
             Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             double? additionsPrice = 0;
+            orderItem.Price = 0;
+            orderItem.SizePrice = 0;
 
             MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == orderItem.IdFromMenu);
             double? sizePrice = db.Sizes.FirstOrDefault(s => s.MenuItemId == menuItem.MenuItemId && s.SizeName == orderItem.Size).AdditionalCost;
             
-            ICollection <Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection <Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Splashes != 0).ToList();
             ViewBag.creamers = creamerList;
             foreach (var item in creamerList) { additionsPrice += item.Price; }
-            ICollection<Drizzle> drizzleList = db.Drizzles.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Drizzle> drizzleList = db.Drizzles.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Drizzles != 0).ToList();
             ViewBag.drizzles = drizzleList;
             foreach (var item in drizzleList) { additionsPrice += item.Price; }
-            ICollection<Powder> powderList = db.Powders.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Powder> powderList = db.Powders.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Scoops != 0).ToList();
             ViewBag.powders = powderList;
             foreach (var item in powderList) { additionsPrice += item.Price; }
-            ICollection<Sauce> sauceList = db.Sauces.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Sauce> sauceList = db.Sauces.Where(c => c.OrderItemId == orderItem.OrderItemId && c.SaucePumps != 0).ToList();
             ViewBag.sauces = sauceList;
             foreach (var item in sauceList) { additionsPrice += item.Price; }
-            ICollection<Shot> shotList = db.Shots.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Shot> shotList = db.Shots.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Shots != 0).ToList();
             ViewBag.shots = shotList;
             foreach (var item in shotList) { additionsPrice += item.Price; }
-            ICollection<Sweetener> sweetenerList = db.Sweeteners.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Sweetener> sweetenerList = db.Sweeteners.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Scoops != 0).ToList();
             ViewBag.sweeteners = sweetenerList;
             foreach (var item in sweetenerList) { additionsPrice += item.Price; }
-            ICollection<Syrup> syrupList = db.Syrups.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Syrup> syrupList = db.Syrups.Where(c => c.OrderItemId == orderItem.OrderItemId && c.SyrupPumps != 0).ToList();
             ViewBag.syrups = syrupList;
             foreach (var item in syrupList) { additionsPrice += item.Price; }
-            ICollection<Toppings> toppingsList = db.Toppings.Where(c => c.OrderItemId == orderItem.OrderItemId).ToList();
+            ICollection<Toppings> toppingsList = db.Toppings.Where(c => c.OrderItemId == orderItem.OrderItemId && c.ToppingsAmmount != 0).ToList();
             ViewBag.toppings = toppingsList;
             foreach (var item in toppingsList) { additionsPrice += item.Price; }
 
-            
+            orderItem.Price = menuItem.Price;
             orderItem.Price += additionsPrice;
             orderItem.Price += sizePrice;
             ViewBag.price = orderItem.Price;
+            db.SaveChanges();
             return View(orderItem);
 
         }
+
+        public ActionResult ReviewSelectedItem(int id)
+        {
+            Customer currentCustomer = GetLoggedInCustomer();
+            currentCustomer.CurrentOrderItemId = id;
+            db.SaveChanges();
+
+            return RedirectToAction("ReviewOrder");
+        }
+
+        public ActionResult ReviewOrderBeforeCheckout()
+        {
+            Customer currentCustomer = GetLoggedInCustomer();
+            Order customerOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            List<OrderItem> currentOrderItems = db.OrderItems.Where(o => o.OrderId == customerOrder.OrderId).ToList();
+            customerOrder.OrderPrice = 0;
+
+            for (int i = 0; i < currentOrderItems.Count(); i++)
+            {
+                customerOrder.OrderPrice += currentOrderItems[i].Price;
+            }
+            ViewBag.TotalOrderPrice = customerOrder.OrderPrice;
+            db.SaveChanges();
+            return View(currentOrderItems);
+             
+        }
+
+
+        public ActionResult SchedulePickUp()
+        {
+            Customer currentCustomer = GetLoggedInCustomer();
+            Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+
+            ViewBag.OrderTime = GetOrderFillTime(currentOrder);
+            return View(currentOrder);
+        }
+
+        [HttpPost]
+        public ActionResult SchedulePickUp(Order order)
+        {
+            Customer currentCustomer = GetLoggedInCustomer();
+            Order setTimeOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            setTimeOrder.FillTime = order.FillTime;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public int GetOrderFillTime(Order order)
+        {
+            int minutes = 0;
+            List<OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == order.OrderId).ToList();
+            foreach (OrderItem orderItem in orderItems)
+            {
+                minutes += 1;
+            }
+            return (minutes);
+        }
+
 
         public ActionResult TestReviewOrder()
         {

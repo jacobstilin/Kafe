@@ -54,6 +54,8 @@ namespace KafeCruisers.Models
 
         public DbSet<Size> Sizes { get; set; }
 
+        public DbSet<Temperature> Temperatures { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
