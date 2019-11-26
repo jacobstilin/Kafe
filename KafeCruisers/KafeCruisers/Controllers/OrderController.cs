@@ -39,6 +39,8 @@ namespace KafeCruisers.Controllers
             Order newOrder = new Order();
             newOrder.CustomerId = customer.CustomerId;
             newOrder.TruckId = customer.OrderTruckId;
+            newOrder.FillTime = DateTime.Now;
+            newOrder.StartTime = DateTime.Now;
             db.Orders.Add(newOrder);
             db.SaveChanges();
             customer.CurrentOrderId = newOrder.OrderId;
@@ -542,7 +544,7 @@ namespace KafeCruisers.Controllers
             Customer currentCustomer = GetLoggedInCustomer();
             Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == currentOrder.TruckId);
-            double orderMinimumTime = GetOrderFillTime(currentOrder);
+            double orderMinimumTime = GetOrderFillDuration(currentOrder);
 
             if (DateTime.Now > truck.StartTime)
             {
@@ -550,7 +552,7 @@ namespace KafeCruisers.Controllers
                 time.AddMinutes(orderMinimumTime);
                 ViewBag.TruckOpens = TimeConverter(time);
             }
-            else
+            if (DateTime.Now > truck.EndTime)
             {
                 DateTime time = truck.StartTime;
                 time.AddMinutes(orderMinimumTime);
@@ -558,9 +560,42 @@ namespace KafeCruisers.Controllers
             }
             
             ViewBag.TruckCloses = TimeConverter(truck.EndTime);
-            
+            List<Order> ordersList = db.Orders.Where(o => o.TruckId == truck.TruckId).ToList();
+
+            string[][] avaibsArray = new string[ordersList.Count][];
+
+            for (int i = 0; i < ordersList.Count; i++)
+            {
+                string[] getArray = GetUnavailableTimes(ordersList[i].OrderId);
+                avaibsArray[i] = new string[2];
+                avaibsArray[i][0] = getArray[0];
+                avaibsArray[i][1] = getArray[1];
+            }
+
+            string[] finalArray = new string[ordersList.Count];
+
+            for(int i = 0; i < ordersList.Count; i++)
+            {
+                string[] arr = avaibsArray[i];
+                string joined = "[ '" + arr[0] + "', '" + arr[1] + "']";
+                
+                finalArray[i] = joined;
+
+            }
+
+            //  02:56 PM,02:56 PM,03:10 PM,03:11 PM    "2:56 PM"
+
+
+
+            string almostJoined = "[ " + string.Join(",", finalArray) + " ]";
+            ViewBag.AvaibsArray = almostJoined;
+
             return View(currentOrder);
         }
+
+        // This ain't working. We may need to make a method that makes the exact input for the disable. 
+
+
 
         [HttpPost]
         public ActionResult SchedulePickUp(Order order)
@@ -573,9 +608,9 @@ namespace KafeCruisers.Controllers
         }
 
 
-        public int GetOrderFillTime(Order order)
+        public double GetOrderFillDuration(Order order)
         {
-            int minutes = 0;
+            double minutes = 0;
             List<OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == order.OrderId).ToList();
             foreach (OrderItem orderItem in orderItems)
             {
@@ -600,6 +635,20 @@ namespace KafeCruisers.Controllers
         }
 
 
+        public string[] GetUnavailableTimes(int orderId)
+        {
+            Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderId);
+
+            string[] unavaibs = new string[2];
+
+                double duration = GetOrderFillDuration(order);
+                unavaibs[0] = TimeConverter(order.FillTime.AddMinutes(duration * -1));
+                unavaibs[1] = TimeConverter(order.FillTime);
+            
+            return (unavaibs);
+        }
+
+       
 
     }
 }

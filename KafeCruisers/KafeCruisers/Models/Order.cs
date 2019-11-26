@@ -14,9 +14,9 @@ namespace KafeCruisers.Models
 
         public int? UniqueId { get; set; }
 
-        public DateTime? StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
-        public DateTime? FillTime { get; set; }
+        public DateTime FillTime { get; set; }
 
         public double? OrderPrice { get; set;
         }

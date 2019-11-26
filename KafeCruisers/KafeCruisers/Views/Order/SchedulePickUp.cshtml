@@ -56,12 +56,18 @@
     var open = '@(ViewBag.TruckOpens)';
     
     var close = '@(ViewBag.TruckCloses)';
+
+    var avaibs = @Html.Raw(ViewBag.AvaibsArray);
+	
+
     $(function () {
 
         $('#disableTimeRangesExample').timepicker({
             'step': 1,
             'minTime': open, 
-            'maxTime': close
+            'maxTime': close,
+            'disableTimeRanges': avaibs
+                
             
         })
     });
