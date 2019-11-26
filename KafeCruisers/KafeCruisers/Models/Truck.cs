@@ -18,8 +18,8 @@ namespace KafeCruisers.Models
         public int? LocationId { get; set; }
         public Location Location { get; set; }
 
-        public int? StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
-        public int? EndTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

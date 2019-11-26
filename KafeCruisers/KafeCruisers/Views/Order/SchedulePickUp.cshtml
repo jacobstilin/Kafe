@@ -8,38 +8,63 @@
 
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SchedulePickUp", "Order", FormMethod.Post, new { id = "form1" }))
+
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+    <div class="form-horizontal">
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.OrderId)
-    @Html.HiddenFor(model => model.UniqueId)
-    @Html.HiddenFor(model => model.StartTime)
-    @Html.HiddenFor(model => model.TruckId)
-    @Html.HiddenFor(model => model.CustomerId)
-    @Html.HiddenFor(model => model.OrderPrice)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OrderId)
+        @Html.HiddenFor(model => model.UniqueId)
+        @Html.HiddenFor(model => model.StartTime)
+        @Html.HiddenFor(model => model.TruckId)
+        @Html.HiddenFor(model => model.CustomerId)
+        @Html.HiddenFor(model => model.OrderPrice)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.FillTime, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="form-group">
+            @Html.LabelFor(model => model.FillTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
 
 
-            Select a time:
-            
+                Select a time:
 
-            
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-default" />
+                <div>
+                    @Html.EditorFor(modelItem => Model.FillTime, new { htmlAttributes = new { @Value = "", @class = "ui-timepicker-input", @id = "disableTimeRangesExample" } })
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                    </div>
+                </div>
+
+
             </div>
-
-
         </div>
     </div>
-</div>
 }
+
+@section Scripts {
+<script type="text/javascript" src="/Scripts/jquery.timepicker.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.timepicker.js"></script>
+<link href="/Scripts/jquery.timepicker.css" rel="stylesheet" />
+<script type="text/javascript">
+    
+    var open = '@(ViewBag.TruckOpens)';
+    
+    var close = '@(ViewBag.TruckCloses)';
+    $(function () {
+
+        $('#disableTimeRangesExample').timepicker({
+            'step': 1,
+            'minTime': open, 
+            'maxTime': close
+            
+        })
+    });
+
+</script>
+    }

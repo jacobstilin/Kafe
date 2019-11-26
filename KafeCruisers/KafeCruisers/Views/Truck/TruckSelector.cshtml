@@ -46,6 +46,9 @@
     <td>
         @Html.ActionLink("Add Menu Item For Truck", "AddMenuItem", "Menu", new { id = item.TruckId }, null)
     </td>
+    <td>
+        @Html.ActionLink("Edit Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, null)
+    </td>
 </tr>
 }
 

@@ -60,6 +60,23 @@ namespace KafeCruisers.Controllers
         }
 
 
+        public ActionResult EditTruckHours(int id)
+        {
+            Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == id);
+            return View(truck);
+        }
+
+        [HttpPost]
+        public ActionResult EditTruckHours(Truck truck)
+        {
+            Truck editTruck = db.Trucks.FirstOrDefault(t => t.TruckId == truck.TruckId);
+            editTruck.StartTime = truck.StartTime;
+            editTruck.EndTime = truck.EndTime;
+            db.SaveChanges();
+            return RedirectToAction("TruckSelector");
+        }
+
+
 
 
 

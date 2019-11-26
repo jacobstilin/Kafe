@@ -291,6 +291,7 @@
     <Content Include="Views\Order\ReviewSelectedItem.cshtml" />
     <Content Include="Views\Menu\AddTemperatures.cshtml" />
     <Content Include="Views\Order\SchedulePickUp.cshtml" />
+    <Content Include="Views\Truck\EditTruckHours.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

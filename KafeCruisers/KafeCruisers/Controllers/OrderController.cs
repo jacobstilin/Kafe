@@ -541,8 +541,24 @@ namespace KafeCruisers.Controllers
         {
             Customer currentCustomer = GetLoggedInCustomer();
             Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == currentOrder.TruckId);
+            double orderMinimumTime = GetOrderFillTime(currentOrder);
 
-            ViewBag.OrderTime = GetOrderFillTime(currentOrder);
+            if (DateTime.Now > truck.StartTime)
+            {
+                DateTime time = (DateTime.Now);
+                time.AddMinutes(orderMinimumTime);
+                ViewBag.TruckOpens = TimeConverter(time);
+            }
+            else
+            {
+                DateTime time = truck.StartTime;
+                time.AddMinutes(orderMinimumTime);
+                ViewBag.TruckOpens = TimeConverter(time);
+            }
+            
+            ViewBag.TruckCloses = TimeConverter(truck.EndTime);
+            
             return View(currentOrder);
         }
 
@@ -576,7 +592,12 @@ namespace KafeCruisers.Controllers
         }
 
 
+        public string TimeConverter(DateTime time)
+        {
+            string timeString = time.ToString("hh:mm tt");
+            return (timeString);
 
+        }
 
 
 
