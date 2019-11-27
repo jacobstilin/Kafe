@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KafeCruisers.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,13 @@ namespace KafeCruisers.Controllers
         {
             return View();
         }
+
+
+        
+
+
+
+
 
         // GET: Customer/Details/5
         public ActionResult Details(int id)

@@ -59,6 +59,14 @@ namespace KafeCruisers.Controllers
             return View(db.Trucks.ToList());
         }
 
+        public ActionResult CustomerTruckSelector()
+        {
+            List<Truck> trucks = db.Trucks.ToList();
+            string api = APIKeys.GoogleMapsApiKey;
+            ViewBag.truckLocations = trucks;
+            ViewBag.key = ("https://maps.googleapis.com/maps/api/js?key=" + api + "&callback=initMap");
+            return View();
+        }
 
         public ActionResult EditTruckHours(int id)
         {
