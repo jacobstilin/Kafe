@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\APIKeys.cs" />
     <Compile Include="Models\Creamer.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Drizzle.cs" />
