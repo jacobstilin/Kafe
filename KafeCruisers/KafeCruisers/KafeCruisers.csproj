@@ -298,6 +298,7 @@
     <Content Include="Views\Order\FinalOrderReview.cshtml" />
     <Content Include="Views\Order\OrderAccepted.cshtml" />
     <Content Include="Views\Order\ReviewOrderByEmployee.cshtml" />
+    <Content Include="Views\Truck\CustomerTruckSelector.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
