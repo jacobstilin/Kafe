@@ -77,13 +77,43 @@ namespace KafeCruisers.Controllers
         }
 
 
+        public ActionResult ViewTruckOrders(int id)
+        {
+            List<Order> truckOrders = db.Orders.Where(o => o.TruckId == id && o.UniqueId != null).ToList();
+            List<Order> sortedList = truckOrders.OrderBy(o => o.UniqueId).ToList();
+            return View(sortedList);
+        }
+
+        public ActionResult ViewTruckOrdersByItem(int id)
+        {
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderItem.OrderId);
+            
+            return View("ViewTruckOrders", new { id = order.TruckId });
+        }
 
 
+        public ActionResult ViewOrderItems(int id)
+        {
+            Order order = db.Orders.FirstOrDefault(o => o.OrderId == id);
+            List<OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == id).ToList();
+            ViewBag.Return = order.TruckId;
+            return View(orderItems);
+        }
 
+        public ActionResult ViewOrderItemsByItemId(int id)
+        {
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderItem.OrderId);
+            
+            return RedirectToAction("ViewOrderItems", new { id = order.OrderId });
+        }
 
-
-
-
+        public ActionResult ViewOrderItem(int id)
+        {
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            return View(orderItem);
+        }
 
 
         // GET: Truck/Edit/5

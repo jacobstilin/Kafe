@@ -460,17 +460,17 @@ namespace KafeCruisers.Controllers
             orderItem.Toppings = toppingsList;
 
             db.SaveChanges();
-            return RedirectToAction("ReviewOrder");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
         // This method takes current OrderItem of logged in customer, compiles total price and gibes additions list to the viewbag
         // Additional method(s) may be needed for reviewing entire order
 
-        public ActionResult ReviewOrder()
+        public ActionResult ReviewOrder(int id)
         {
             Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
             double? additionsPrice = 0;
             orderItem.Price = 0;
             orderItem.SizePrice = 0;
@@ -512,15 +512,53 @@ namespace KafeCruisers.Controllers
 
         }
 
+        public ActionResult ReviewOrderByEmployee(int id)
+        {
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            
+            ICollection<Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Splashes != 0).ToList();
+            ViewBag.creamers = creamerList;
+            ICollection<Drizzle> drizzleList = db.Drizzles.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Drizzles != 0).ToList();
+            ViewBag.drizzles = drizzleList;
+            ICollection<Powder> powderList = db.Powders.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Scoops != 0).ToList();
+            ViewBag.powders = powderList;
+            ICollection<Sauce> sauceList = db.Sauces.Where(c => c.OrderItemId == orderItem.OrderItemId && c.SaucePumps != 0).ToList();
+            ViewBag.sauces = sauceList;
+            ICollection<Shot> shotList = db.Shots.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Shots != 0).ToList();
+            ViewBag.shots = shotList;
+            ICollection<Sweetener> sweetenerList = db.Sweeteners.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Scoops != 0).ToList();
+            ViewBag.sweeteners = sweetenerList;
+            ICollection<Syrup> syrupList = db.Syrups.Where(c => c.OrderItemId == orderItem.OrderItemId && c.SyrupPumps != 0).ToList();
+            ViewBag.syrups = syrupList;
+            ICollection<Toppings> toppingsList = db.Toppings.Where(c => c.OrderItemId == orderItem.OrderItemId && c.ToppingsAmmount != 0).ToList();
+            ViewBag.toppings = toppingsList;
+            ViewBag.price = orderItem.Price;
+            
+            return View(orderItem);
+
+        }
+
+
+
+
+
+
         public ActionResult ReviewSelectedItem(int id)
         {
             Customer currentCustomer = GetLoggedInCustomer();
             currentCustomer.CurrentOrderItemId = id;
             db.SaveChanges();
 
-            return RedirectToAction("ReviewOrder");
+            return RedirectToAction("ReviewOrder", new { id = id });
         }
 
+        public ActionResult ReviewSelectedItemByEmployee(int id)
+        {
+            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderItem.OrderId);
+
+            return RedirectToAction("ReviewOrderByEmployee", new { id = id });
+        }
         public ActionResult ReviewOrderBeforeCheckout()
         {
             Customer currentCustomer = GetLoggedInCustomer();
@@ -552,7 +590,7 @@ namespace KafeCruisers.Controllers
                 time.AddMinutes(orderMinimumTime);
                 ViewBag.TruckOpens = TimeConverter(time);
             }
-            if (DateTime.Now > truck.EndTime)
+            if (DateTime.Now > truck.EndTime && DateTime.Now < truck.StartTime)
             {
                 DateTime time = truck.StartTime;
                 time.AddMinutes(orderMinimumTime);
@@ -583,17 +621,13 @@ namespace KafeCruisers.Controllers
 
             }
 
-            //  02:56 PM,02:56 PM,03:10 PM,03:11 PM    "2:56 PM"
-
-
-
             string almostJoined = "[ " + string.Join(",", finalArray) + " ]";
             ViewBag.AvaibsArray = almostJoined;
 
             return View(currentOrder);
         }
 
-        // This ain't working. We may need to make a method that makes the exact input for the disable. 
+        // THAT THING'S OPERATIONAL 
 
 
 
@@ -604,8 +638,52 @@ namespace KafeCruisers.Controllers
             Order setTimeOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             setTimeOrder.FillTime = order.FillTime;
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("FinalOrderReview");
         }
+
+
+        public ActionResult FinalOrderReview()
+        {
+            Customer currentCustomer = GetLoggedInCustomer();
+            Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            List<OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == currentOrder.OrderId).ToList();
+            // Here the customer will select payment option and place the order. They will then be taken to the Unique OrderId page.
+            // The Unique Id page will have to be callable once the order is finally placed. We will need to database it up once the order
+            // is placed or filled. Also, once the order is placed and the ID assigned, the employee order list will update. 
+
+            ViewBag.Time = currentOrder.FillTime;
+            return View(orderItems);
+        }
+
+        // Methods for accepting or cancelling final order
+
+        public ActionResult OrderAccepted()
+        {
+            Customer currentCustomer = GetLoggedInCustomer();
+            Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            currentOrder.UniqueId = (currentOrder.OrderId % 1000);
+            db.SaveChanges();
+            return View(currentOrder);
+        }
+
+        public ActionResult OrderCancelled()
+        {
+            return View();
+        }
+
+
+        public ActionResult OrderFilled(int id)
+        {
+            Order filledOrder = db.Orders.FirstOrDefault(o => o.OrderId == id);
+            filledOrder.UniqueId = null;
+            db.SaveChanges();
+            return RedirectToAction("ViewTruckOrders", "Truck", new { id = filledOrder.TruckId });
+        }
+
+
+
+
+
 
 
         public double GetOrderFillDuration(Order order)
@@ -622,7 +700,8 @@ namespace KafeCruisers.Controllers
 
         public ActionResult TestReviewOrder()
         {
-            return RedirectToAction("ReviewOrder");
+            int id = 99;
+            return RedirectToAction("ReviewOrder", new { id = id });
 
         }
 

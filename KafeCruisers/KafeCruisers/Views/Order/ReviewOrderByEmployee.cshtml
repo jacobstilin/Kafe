@@ -1,0 +1,271 @@
+﻿@model KafeCruisers.Models.OrderItem
+@{
+    ViewBag.Title = "ReviewOrderByEmployee";
+}
+
+<h2>ReviewOrderByEmployee</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Decaf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Decaf)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhippedCream)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WhippedCream)
+        </dd>
+
+        <dt>
+            <h2>Price</h2>
+        </dt>
+
+        <dd>
+            @{ double? price = ViewBag.price; }
+            @Html.DisplayFor(model => price)
+        </dd>
+
+        @{
+            var creamersList = ViewBag.creamers as ICollection<KafeCruisers.Models.Creamer>;
+
+            for (int i = 0; i < creamersList.Count(); i++)
+            {
+                if (creamersList.ElementAt(i).Splashes != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => creamersList.ElementAt(i).CreamerType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => creamersList.ElementAt(i).CreamerType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => creamersList.ElementAt(i).Splashes)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => creamersList.ElementAt(i).Splashes)
+                    </dd>
+                }
+            }
+        }
+        @{
+            var shotList = ViewBag.shots as ICollection<KafeCruisers.Models.Shot>;
+
+            for (int i = 0; i < shotList.Count(); i++)
+            {
+                if (shotList.ElementAt(i).Shots != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => shotList.ElementAt(i).ShotType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => shotList.ElementAt(i).ShotType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => shotList.ElementAt(i).Shots)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => shotList.ElementAt(i).Shots)
+                    </dd>
+                }
+            }
+        }
+        @{
+            var sweetenerList = ViewBag.sweeteners as ICollection<KafeCruisers.Models.Sweetener>;
+
+            for (int i = 0; i < sweetenerList.Count(); i++)
+            {
+                if (sweetenerList.ElementAt(i).Scoops != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => sweetenerList.ElementAt(i).SweetenerType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => sweetenerList.ElementAt(i).SweetenerType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => sweetenerList.ElementAt(i).Scoops)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => sweetenerList.ElementAt(i).Scoops)
+                    </dd>
+                }
+            }
+        }
+        @{
+            var sauceList = ViewBag.sauces as ICollection<KafeCruisers.Models.Sauce>;
+
+            for (int i = 0; i < sauceList.Count(); i++)
+            {
+                if (sauceList.ElementAt(i).SaucePumps != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => sauceList.ElementAt(i).SauceType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => sauceList.ElementAt(i).SauceType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => sauceList.ElementAt(i).SaucePumps)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => sauceList.ElementAt(i).SaucePumps)
+                    </dd>
+                }
+            }
+        }
+        @{
+            var syrupList = ViewBag.syrups as ICollection<KafeCruisers.Models.Syrup>;
+
+            for (int i = 0; i < syrupList.Count(); i++)
+            {
+                if (syrupList.ElementAt(i).SyrupPumps != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => syrupList.ElementAt(i).SyrupType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => syrupList.ElementAt(i).SyrupType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => syrupList.ElementAt(i).SyrupPumps)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => syrupList.ElementAt(i).SyrupPumps)
+                    </dd>
+                }
+            }
+        }
+
+        @{
+            var drizzleList = ViewBag.drizzles as ICollection<KafeCruisers.Models.Drizzle>;
+
+            for (int i = 0; i < drizzleList.Count(); i++)
+            {
+                if (drizzleList.ElementAt(i).Drizzles != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => drizzleList.ElementAt(i).DrizzleType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => drizzleList.ElementAt(i).DrizzleType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => drizzleList.ElementAt(i).Drizzles)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => drizzleList.ElementAt(i).Drizzles)
+                    </dd>
+                }
+            }
+        }
+        @{
+            var powderList = ViewBag.powders as ICollection<KafeCruisers.Models.Powder>;
+
+            for (int i = 0; i < powderList.Count(); i++)
+            {
+                if (powderList.ElementAt(i).Scoops != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => powderList.ElementAt(i).PowderType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => powderList.ElementAt(i).PowderType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => powderList.ElementAt(i).Scoops)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => powderList.ElementAt(i).Scoops)
+                    </dd>
+                }
+            }
+        }
+        @{
+            var toppingsList = ViewBag.toppings as ICollection<KafeCruisers.Models.Toppings>;
+
+            for (int i = 0; i < toppingsList.Count(); i++)
+            {
+                if (toppingsList.ElementAt(i).ToppingsAmmount != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => toppingsList.ElementAt(i).ToppingsType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => toppingsList.ElementAt(i).ToppingsType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => toppingsList.ElementAt(i).ToppingsAmmount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => toppingsList.ElementAt(i).ToppingsAmmount)
+                    </dd>
+                }
+            }
+        }
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Back To Order", "ViewOrderItems", "Truck", new { id = Model.OrderId }, null)
+</p>

@@ -292,6 +292,12 @@
     <Content Include="Views\Menu\AddTemperatures.cshtml" />
     <Content Include="Views\Order\SchedulePickUp.cshtml" />
     <Content Include="Views\Truck\EditTruckHours.cshtml" />
+    <Content Include="Views\Truck\ViewTruckOrders.cshtml" />
+    <Content Include="Views\Truck\ViewOrderItems.cshtml" />
+    <Content Include="Views\Truck\ViewOrderItem.cshtml" />
+    <Content Include="Views\Order\FinalOrderReview.cshtml" />
+    <Content Include="Views\Order\OrderAccepted.cshtml" />
+    <Content Include="Views\Order\ReviewOrderByEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
