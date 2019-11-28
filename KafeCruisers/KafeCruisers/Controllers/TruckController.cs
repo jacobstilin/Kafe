@@ -1,4 +1,5 @@
 ﻿using KafeCruisers.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,20 @@ namespace KafeCruisers.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public Customer GetLoggedInCustomer()
+        {
+            string currentId = User.Identity.GetUserId();
+            Customer customer = db.Customers.FirstOrDefault(u => u.ApplicationId == currentId);
+            return (customer);
+        }
+
+
         // GET: Truck
         public ActionResult Index()
         {
             return View();
         }
+
 
         // GET: Truck/Details/5
         public ActionResult Details(int id)
@@ -23,11 +33,13 @@ namespace KafeCruisers.Controllers
             return View();
         }
 
+
         // GET: Truck/Create
         public ActionResult Create()
         {
             return View();
         }
+
 
         // POST: Truck/Create
         [HttpPost]
@@ -56,10 +68,12 @@ namespace KafeCruisers.Controllers
             }*/
         }
 
+
         public ActionResult TruckSelector()
         {
             return View(db.Trucks.ToList());
         }
+
 
         public ActionResult CustomerTruckSelector()
         {
@@ -70,6 +84,7 @@ namespace KafeCruisers.Controllers
             ViewBag.coordinates = GetTruckCoordinates();
             return View();
         }
+
 
         public string GetTruckCoordinates()
         {
@@ -90,11 +105,16 @@ namespace KafeCruisers.Controllers
             return finalArray;
         }
 
+
         public ActionResult SelectedTruck(int id)
         {
             // Set this id as the customer's current truck and give a mf menu
+            Customer customer = GetLoggedInCustomer();
+            customer.OrderTruckId = id;
+            db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+
 
         public ActionResult SetLocation(int id, int truckId)
         {
@@ -106,11 +126,13 @@ namespace KafeCruisers.Controllers
             return RedirectToAction("TruckSelector");
         }
 
+
         public ActionResult EditTruckHours(int id)
         {
             Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == id);
             return View(truck);
         }
+
 
         [HttpPost]
         public ActionResult EditTruckHours(Truck truck)
@@ -130,6 +152,7 @@ namespace KafeCruisers.Controllers
             return View(sortedList);
         }
 
+
         public ActionResult ViewTruckOrdersByItem(int id)
         {
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
@@ -147,6 +170,7 @@ namespace KafeCruisers.Controllers
             return View(orderItems);
         }
 
+
         public ActionResult ViewOrderItemsByItemId(int id)
         {
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
@@ -155,11 +179,25 @@ namespace KafeCruisers.Controllers
             return RedirectToAction("ViewOrderItems", new { id = order.OrderId });
         }
 
+
         public ActionResult ViewOrderItem(int id)
         {
             OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
             return View(orderItem);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // GET: Truck/Edit/5
