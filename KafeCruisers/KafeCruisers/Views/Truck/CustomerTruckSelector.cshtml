@@ -25,11 +25,8 @@
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <script type="text/javascript">
-        var points = [
-            ['Pritzlaff Truck', 43.034332, -87.912167, 12, 'www.google.com'],
-            ['name2', 59.941412822085645, 30.263564729357767, 11, 'www.google.com'],
-            ['name3', 59.939177197629455, 30.273554411974955, 10, 'www.google.com']
-        ];
+        
+        var points = @Html.Raw(ViewBag.coordinates);
 
 
 

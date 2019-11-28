@@ -173,6 +173,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -300,6 +301,9 @@
     <Content Include="Views\Order\OrderAccepted.cshtml" />
     <Content Include="Views\Order\ReviewOrderByEmployee.cshtml" />
     <Content Include="Views\Truck\CustomerTruckSelector.cshtml" />
+    <Content Include="Views\Location\AddLocation.cshtml" />
+    <Content Include="Views\Location\ViewLocations.cshtml" />
+    <Content Include="Views\Location\LocationsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

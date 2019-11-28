@@ -52,6 +52,9 @@
     <td>
         @Html.ActionLink("View Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, null)
     </td>
+    <td>
+        @Html.ActionLink("Set Location", "ViewLocations", "Location", new { id = item.TruckId }, null)
+    </td>
 </tr>
 }
 

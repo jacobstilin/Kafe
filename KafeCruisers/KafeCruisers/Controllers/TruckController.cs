@@ -33,10 +33,12 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult Create(Truck truck)
         {
-            try
-            {
+            /*try
+            {*/
                 Truck newTruck = new Truck();
                 newTruck.TruckName = truck.TruckName;
+                newTruck.StartTime = DateTime.Now;
+                newTruck.EndTime = DateTime.Now;
                 Menu menu = new Menu();
                 string newMenuName = (truck.TruckName + "Menu");
                 menu.MenuName = newMenuName;
@@ -47,11 +49,11 @@ namespace KafeCruisers.Controllers
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
-            }
+            /*}
             catch
             {
                 return View();
-            }
+            }*/
         }
 
         public ActionResult TruckSelector()
@@ -63,9 +65,45 @@ namespace KafeCruisers.Controllers
         {
             List<Truck> trucks = db.Trucks.ToList();
             string api = APIKeys.GoogleMapsApiKey;
-            ViewBag.truckLocations = trucks;
+            
             ViewBag.key = ("https://maps.googleapis.com/maps/api/js?key=" + api + "&callback=initMap");
+            ViewBag.coordinates = GetTruckCoordinates();
             return View();
+        }
+
+        public string GetTruckCoordinates()
+        {
+            // Change later to be a list of trucks that are open...mf staying past close n shit
+            // List<Truck> trucksList = db.Trucks.Where(t => t.StartTime > DateTime.Now && t.EndTime < DateTime.Now).ToList();
+            List<Truck> trucksList = db.Trucks.ToList();
+            string[] stringArray = new string[trucksList.Count];
+            for (int i = 0; i < trucksList.Count; i++)
+            {
+                Truck truck = trucksList[i];
+                Location location = db.Locations.FirstOrDefault(l => l.LocationId == truck.LocationId);
+                
+                string arrayString = "['" + location.LocationName + "', " + location.Longitude + ", " + location.Latitude + ", 0, 'SelectedTruck/" + location.LocationId + "']";
+                stringArray[i] = arrayString;
+            }
+
+            string finalArray = "[ " + string.Join(",", stringArray) + " ]";
+            return finalArray;
+        }
+
+        public ActionResult SelectedTruck(int id)
+        {
+            // Set this id as the customer's current truck and give a mf menu
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult SetLocation(int id, int truckId)
+        {
+            Location location = db.Locations.FirstOrDefault(l => l.LocationId == id);
+            Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == truckId);
+
+            truck.LocationId = location.LocationId;
+            db.SaveChanges();
+            return RedirectToAction("TruckSelector");
         }
 
         public ActionResult EditTruckHours(int id)

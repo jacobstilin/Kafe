@@ -1,0 +1,43 @@
+﻿@model IEnumerable<KafeCruisers.Models.Location>
+
+@{
+    ViewBag.Title = "ViewLocations";
+}
+
+<h2>ViewLocations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.ActionLink("Set Truck To This Location", "SetLocation", "Truck", new { id=item.LocationId, truckId = ViewBag.truck }, null)
+        </td>
+    </tr>
+}
+
+</table>
