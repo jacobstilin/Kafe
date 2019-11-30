@@ -97,7 +97,7 @@ namespace KafeCruisers.Controllers
                 Truck truck = trucksList[i];
                 Location location = db.Locations.FirstOrDefault(l => l.LocationId == truck.LocationId);
                 
-                string arrayString = "['" + location.LocationName + "', " + location.Longitude + ", " + location.Latitude + ", 0, 'SelectedTruck/" + location.LocationId + "']";
+                string arrayString = "['" + location.LocationName + "', " + location.Longitude + ", " + location.Latitude + ", 0, 'SelectedTruck/" + truck.TruckId + "']";
                 stringArray[i] = arrayString;
             }
 

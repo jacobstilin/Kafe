@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Stripe;
 
 namespace KafeCruisers.Controllers
 {
@@ -18,16 +19,16 @@ namespace KafeCruisers.Controllers
 
         public ActionResult Index(int id)
         {
-            Customer customer = GetLoggedInCustomer();
+            Models.Customer customer = GetLoggedInCustomer();
             customer.OrderTruckId = id;
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
 
-        public Customer GetLoggedInCustomer()
+        public Models.Customer GetLoggedInCustomer()
         {
             string currentId = User.Identity.GetUserId();
-            Customer customer = db.Customers.FirstOrDefault(u => u.ApplicationId == currentId);
+            Models.Customer customer = db.Customers.FirstOrDefault(u => u.ApplicationId == currentId);
             return (customer);
         }
 
@@ -35,8 +36,8 @@ namespace KafeCruisers.Controllers
         
         public ActionResult StartOrder()
         {
-            Customer customer = GetLoggedInCustomer();
-            Order newOrder = new Order();
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.Order newOrder = new Models.Order();
             newOrder.CustomerId = customer.CustomerId;
             newOrder.TruckId = customer.OrderTruckId;
             newOrder.FillTime = DateTime.Now;
@@ -54,7 +55,7 @@ namespace KafeCruisers.Controllers
         //Same method as above, only the customer continues on the same order
         public ActionResult AdditionalDrink()
         {
-            Customer customer = GetLoggedInCustomer();
+            Models.Customer customer = GetLoggedInCustomer();
             Menu truckMenu = db.Menus.FirstOrDefault(m => m.TruckId == customer.OrderTruckId);
             
             return View(db.MenuItems.Where(m => m.MenuId == truckMenu.MenuId && m.Category == "Drink").ToList());
@@ -64,8 +65,8 @@ namespace KafeCruisers.Controllers
         // Gets the id of the drink from the view
         public ActionResult EditOrderItem(int id)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = new OrderItem();
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = new Models.OrderItem();
             MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == id);
             orderItem.OrderId = customer.CurrentOrderId;
             orderItem.ItemName = menuItem.Name;
@@ -85,12 +86,12 @@ namespace KafeCruisers.Controllers
 
         
         [HttpPost]
-        public ActionResult EditOrderItem(int id, OrderItem orderItem)
+        public ActionResult EditOrderItem(int id, Models.OrderItem orderItem)
         {
             try
             {
-                Customer customer = GetLoggedInCustomer();
-                OrderItem newOrderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+                Models.Customer customer = GetLoggedInCustomer();
+                Models.OrderItem newOrderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
                 newOrderItem.Size = orderItem.Size;
                 newOrderItem.Room = orderItem.Room;
                 newOrderItem.Decaf = orderItem.Decaf;
@@ -123,8 +124,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditCreamers(ICollection<MenuItem> creamers)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Creamer> creamerList = new List<Creamer>();
 
             for (int i = 0; i < creamers.Count(); i++)
@@ -166,8 +167,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditShots(ICollection<MenuItem> shots)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Shot> shotList = new List<Shot>();
 
             for (int i = 0; i < shots.Count(); i++)
@@ -209,8 +210,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditSweeteners(ICollection<MenuItem> sweeteners)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Sweetener> sweetenerList = new List<Sweetener>();
 
             for (int i = 0; i < sweeteners.Count(); i++)
@@ -253,8 +254,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditSauces(ICollection<MenuItem> sauces)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Sauce> sauceList = new List<Sauce>();
 
             for (int i = 0; i < sauces.Count(); i++)
@@ -297,8 +298,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditSyrups(ICollection<MenuItem> syrups)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Syrup> syrupList = new List<Syrup>();
 
             for (int i = 0; i < syrups.Count(); i++)
@@ -343,8 +344,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditDrizzles(ICollection<MenuItem> drizzles)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Drizzle> drizzleList = new List<Drizzle>();
 
             for (int i = 0; i < drizzles.Count(); i++)
@@ -387,8 +388,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditPowders(ICollection<MenuItem> powders)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Powder> powderList = new List<Powder>();
 
             for (int i = 0; i < powders.Count(); i++)
@@ -431,8 +432,8 @@ namespace KafeCruisers.Controllers
         [HttpPost]
         public ActionResult EditToppings(ICollection<MenuItem> toppings)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == customer.CurrentOrderItemId);
             List<Toppings> toppingsList = new List<Toppings>();
 
             for (int i = 0; i < toppings.Count(); i++)
@@ -469,8 +470,8 @@ namespace KafeCruisers.Controllers
 
         public ActionResult ReviewOrder(int id)
         {
-            Customer customer = GetLoggedInCustomer();
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
             double? additionsPrice = 0;
             orderItem.Price = 0;
             orderItem.SizePrice = 0;
@@ -514,7 +515,7 @@ namespace KafeCruisers.Controllers
 
         public ActionResult ReviewOrderByEmployee(int id)
         {
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
             
             ICollection<Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Splashes != 0).ToList();
             ViewBag.creamers = creamerList;
@@ -545,7 +546,7 @@ namespace KafeCruisers.Controllers
 
         public ActionResult ReviewSelectedItem(int id)
         {
-            Customer currentCustomer = GetLoggedInCustomer();
+            Models.Customer currentCustomer = GetLoggedInCustomer();
             currentCustomer.CurrentOrderItemId = id;
             db.SaveChanges();
 
@@ -554,16 +555,16 @@ namespace KafeCruisers.Controllers
 
         public ActionResult ReviewSelectedItemByEmployee(int id)
         {
-            OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
-            Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderItem.OrderId);
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            Models.Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderItem.OrderId);
 
             return RedirectToAction("ReviewOrderByEmployee", new { id = id });
         }
         public ActionResult ReviewOrderBeforeCheckout()
         {
-            Customer currentCustomer = GetLoggedInCustomer();
-            Order customerOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
-            List<OrderItem> currentOrderItems = db.OrderItems.Where(o => o.OrderId == customerOrder.OrderId).ToList();
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order customerOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            List<Models.OrderItem> currentOrderItems = db.OrderItems.Where(o => o.OrderId == customerOrder.OrderId).ToList();
             customerOrder.OrderPrice = 0;
 
             for (int i = 0; i < currentOrderItems.Count(); i++)
@@ -579,8 +580,8 @@ namespace KafeCruisers.Controllers
 
         public ActionResult SchedulePickUp()
         {
-            Customer currentCustomer = GetLoggedInCustomer();
-            Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == currentOrder.TruckId);
             double orderMinimumTime = GetOrderFillDuration(currentOrder);
 
@@ -598,7 +599,7 @@ namespace KafeCruisers.Controllers
             }
             
             ViewBag.TruckCloses = TimeConverter(truck.EndTime);
-            List<Order> ordersList = db.Orders.Where(o => o.TruckId == truck.TruckId).ToList();
+            List<Models.Order> ordersList = db.Orders.Where(o => o.TruckId == truck.TruckId).ToList();
 
             string[][] avaibsArray = new string[ordersList.Count][];
 
@@ -632,10 +633,10 @@ namespace KafeCruisers.Controllers
 
 
         [HttpPost]
-        public ActionResult SchedulePickUp(Order order)
+        public ActionResult SchedulePickUp(Models.Order order)
         {
-            Customer currentCustomer = GetLoggedInCustomer();
-            Order setTimeOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order setTimeOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             setTimeOrder.FillTime = order.FillTime;
             db.SaveChanges();
             return RedirectToAction("FinalOrderReview");
@@ -644,27 +645,124 @@ namespace KafeCruisers.Controllers
 
         public ActionResult FinalOrderReview()
         {
-            Customer currentCustomer = GetLoggedInCustomer();
-            Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
-            List<OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == currentOrder.OrderId).ToList();
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            List<Models.OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == currentOrder.OrderId).ToList();
             // Here the customer will select payment option and place the order. They will then be taken to the Unique OrderId page.
             // The Unique Id page will have to be callable once the order is finally placed. We will need to database it up once the order
             // is placed or filled. Also, once the order is placed and the ID assigned, the employee order list will update. 
+
 
             ViewBag.Time = currentOrder.FillTime;
             return View(orderItems);
         }
 
         // Methods for accepting or cancelling final order
-
+        // More on this later--let's use the cart model and controller I suppose
         public ActionResult OrderAccepted()
         {
-            Customer currentCustomer = GetLoggedInCustomer();
-            Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            CardInfo card = db.Cards.FirstOrDefault(c => c.CustomerId == currentCustomer.CustomerId);
+            
+            if (currentCustomer.IsStripeSetUp == true)
+            {
+
+                return View(card);  // Create charge using customer info
+            }
+            else
+            {
+                return RedirectToAction("SetUpStripe");
+            }
+        }
+
+        
+        public ActionResult UsePreloadedCard()  //We can pass whatever we need here since current order can always be called
+        {
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            StripeConfiguration.ApiKey = (APIKeys.StripeApiKey);
+
+            // `source` is obtained with Stripe.js; see https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
+            var options = new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt64(currentOrder.OrderPrice * 100),
+                Currency = "usd",
+                Customer = currentCustomer.CustomerStripeId,
+                Description = "Aow",
+            };
+            var service = new ChargeService();
+            Charge charge = service.Create(options);
+
+            var model = new Cart();
+            model.ChargeId = charge.Id;
+
+            return RedirectToAction("UniqueIdScreen");
+        }
+
+        public ActionResult SetUpStripe() //Build this view for customer info input
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SetUpStripe(CardInfo cardInfo)  // Create customer then create charge in next view
+        {
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            CardInfo newCard = new CardInfo();
+            newCard.CardName = cardInfo.CardName;
+            newCard.Email = cardInfo.Email;
+            newCard.CustomerId = currentCustomer.CustomerId;
+            db.Cards.Add(newCard);
+
+            StripeConfiguration.ApiKey = (APIKeys.StripeApiKey);
+
+            var options = new CustomerCreateOptions
+            {
+                Description = ("Customer for " + cardInfo.Email),
+                Email = cardInfo.Email,
+                Source = cardInfo.StripeToken
+            };
+            var service = new CustomerService();
+            Stripe.Customer customer = service.Create(options);
+            currentCustomer.CustomerStripeId = customer.Id;
+            currentCustomer.IsStripeSetUp = true;
+            db.SaveChanges();
+
+            var createOptions = new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt64(currentOrder.OrderPrice * 100),
+                Currency = "usd",
+                Customer = currentCustomer.CustomerStripeId, // Have to pass in customer ID since token can't be called twice
+                Description = "Aow",
+            };
+            var createService = new ChargeService();
+            Charge charge = createService.Create(createOptions);
+
+            var model = new Cart(); //Cart is like the charge view model from video
+            model.ChargeId = charge.Id;
+
+            // Perhaps payment will happen with this setup for the first time
+
+            return RedirectToAction("UniqueIdScreen"); // This redirect may have to change
+        }
+
+
+        
+
+        public ActionResult UniqueIdScreen()   //Order is all set for pickup, all roads lead here
+        {
+            Models.Customer currentCustomer = GetLoggedInCustomer();
+            Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             currentOrder.UniqueId = (currentOrder.OrderId % 1000);
             db.SaveChanges();
+
             return View(currentOrder);
         }
+
+
+
+
 
         public ActionResult OrderCancelled()
         {
@@ -674,7 +772,7 @@ namespace KafeCruisers.Controllers
 
         public ActionResult OrderFilled(int id)
         {
-            Order filledOrder = db.Orders.FirstOrDefault(o => o.OrderId == id);
+            Models.Order filledOrder = db.Orders.FirstOrDefault(o => o.OrderId == id);
             filledOrder.UniqueId = null;
             db.SaveChanges();
             return RedirectToAction("ViewTruckOrders", "Truck", new { id = filledOrder.TruckId });
@@ -686,11 +784,11 @@ namespace KafeCruisers.Controllers
 
 
 
-        public double GetOrderFillDuration(Order order)
+        public double GetOrderFillDuration(Models.Order order)
         {
             double minutes = 0;
-            List<OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == order.OrderId).ToList();
-            foreach (OrderItem orderItem in orderItems)
+            List<Models.OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == order.OrderId).ToList();
+            foreach (Models.OrderItem orderItem in orderItems)
             {
                 minutes += 1;
             }
@@ -700,7 +798,7 @@ namespace KafeCruisers.Controllers
 
         public ActionResult TestReviewOrder()
         {
-            int id = 99;
+            int id = 65;
             return RedirectToAction("ReviewOrder", new { id = id });
 
         }
@@ -716,7 +814,7 @@ namespace KafeCruisers.Controllers
 
         public string[] GetUnavailableTimes(int orderId)
         {
-            Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderId);
+            Models.Order order = db.Orders.FirstOrDefault(o => o.OrderId == orderId);
 
             string[] unavaibs = new string[2];
 

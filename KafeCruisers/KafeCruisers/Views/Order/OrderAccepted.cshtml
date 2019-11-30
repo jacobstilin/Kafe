@@ -1,10 +1,28 @@
-﻿@model KafeCruisers.Models.Order
+﻿@model KafeCruisers.Models.CardInfo
 @{
     ViewBag.Title = "OrderAccepted";
 }
 
-<h2>OrderAccepted</h2>
+<div>
 
-<h3>@Model.UniqueId</h3>
+    <hr />
+    <dl class="dl-horizontal">
 
-<h2>Show this number to a Barista when picking up your order.</h2>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CardName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardName)
+        </dd>
+
+        <dd>
+            @Html.ActionLink("Use This Card", "UsePreloadedCard", "Order")
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @Html.ActionLink("Set Up New Card", "SetUpStripe", "Order")
+</div>

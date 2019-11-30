@@ -28,6 +28,8 @@ namespace KafeCruisers.Models
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-
+        public bool IsStripeSetUp { get; set; }
+        
+        public string CustomerStripeId { get; set; }
     }
 }

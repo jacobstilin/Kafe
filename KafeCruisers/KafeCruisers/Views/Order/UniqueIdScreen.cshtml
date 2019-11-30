@@ -1,0 +1,15 @@
+﻿@model KafeCruisers.Models.Order
+@{
+    ViewBag.Title = "UniqueIdScreen";
+}
+
+<h2>Thank you for your purchase!</h2>
+
+<p>Your Order will be ready at @Model.FillTime</p>
+
+<p>Your Order ID is:</p>
+
+<h2>@Model.UniqueId</h2>
+
+<p>Please show this screen to a barista when picking up your order.</p>
+
