@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace KafeCruisers.Controllers
 {
+    [Authorize]
     public class LocationController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

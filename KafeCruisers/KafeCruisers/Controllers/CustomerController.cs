@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace KafeCruisers.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         // GET: Customer

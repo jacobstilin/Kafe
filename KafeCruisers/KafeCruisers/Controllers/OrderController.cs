@@ -12,6 +12,7 @@ using Stripe;
 
 namespace KafeCruisers.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -591,7 +592,7 @@ namespace KafeCruisers.Controllers
                 time.AddMinutes(orderMinimumTime);
                 ViewBag.TruckOpens = TimeConverter(time);
             }
-            if (DateTime.Now > truck.EndTime && DateTime.Now < truck.StartTime)
+            if (DateTime.Now > truck.EndTime)
             {
                 DateTime time = truck.StartTime;
                 time.AddMinutes(orderMinimumTime);

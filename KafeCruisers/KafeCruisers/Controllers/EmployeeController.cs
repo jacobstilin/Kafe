@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace KafeCruisers.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace KafeCruisers.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         // GET: Cart
