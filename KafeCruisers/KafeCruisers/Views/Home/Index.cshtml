@@ -4,7 +4,7 @@
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>
-    
+
 </div>
 
 <div>
@@ -34,3 +34,24 @@
 <div>
     @Html.ActionLink("Stripe Test", "CreateCharge", "Cart")
 </div>
+
+
+@if (ViewBag.role == "AppManager")
+{
+    <div>
+        @Html.ActionLink("Select Truck", "TruckSelector", "Truck")
+    </div>
+    <div>
+        @Html.ActionLink("Add Location", "AddLocation", "Location")
+    </div>
+}
+
+@if (ViewBag.role == "Customer")
+{
+    <div>
+        @Html.ActionLink("Place Order", "StartOrder", "Order")
+    </div>
+    <div>
+        @Html.ActionLink("Customer Truck Select", "CustomerTruckSelector", "Truck")
+    </div>
+}

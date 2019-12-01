@@ -167,7 +167,10 @@ namespace KafeCruisers.Controllers
 
                     Customer customer = new Customer();
                     string currentId = user.Id;
+                    UserManager.AddToRole(user.Id, "Customer");
                     customer.ApplicationId = currentId;
+                    customer.FirstName = model.FirstName;
+                    customer.lastName = model.LastName;
                     db.Customers.Add(customer);
                     db.SaveChanges();
 

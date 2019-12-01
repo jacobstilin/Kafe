@@ -23,6 +23,15 @@ namespace KafeCruisers.Controllers
 
         public ActionResult Index()
         {
+            bool userRole = User.IsInRole("AppManager");
+            if (userRole == true)
+            {
+                ViewBag.role = "AppManager";
+            }
+            else
+            {
+                ViewBag.role = "Customer";
+            }
             return View();
         }
 

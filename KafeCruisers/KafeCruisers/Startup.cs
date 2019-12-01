@@ -43,10 +43,12 @@ namespace KafeCruisers
 
                 if (chkUser.Succeeded)
                 {
-                    var result1 = UserManager.AddToRole(user.Id, "AppManager");
+                    UserManager.AddToRole(user.Id, "AppManager");
                 }
+               
+                
             }
-
+            
             if (!roleManager.RoleExists("Customer"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
