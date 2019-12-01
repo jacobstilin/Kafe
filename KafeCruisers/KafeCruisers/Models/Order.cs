@@ -14,8 +14,10 @@ namespace KafeCruisers.Models
 
         public int? UniqueId { get; set; }
 
+        [Display(Name = "Start Time")]
         public DateTime StartTime { get; set; }
 
+        [Display(Name = "Fill Time")]
         public DateTime FillTime { get; set; }
 
         public double? OrderPrice { get; set;

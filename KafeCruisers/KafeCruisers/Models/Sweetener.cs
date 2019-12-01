@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int SweeterId { get; set; }
 
+        [Display(Name = "Sweetener Type")]
         public string SweetenerType { get; set; }
 
         public int? Scoops { get; set; }

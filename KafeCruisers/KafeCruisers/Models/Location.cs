@@ -11,6 +11,7 @@ namespace KafeCruisers.Models
         [Key]
         public int LocationId { get; set; }
 
+        [Display(Name = "Location")]
         public string LocationName { get; set; }
 
         public string Longitude { get; set; }

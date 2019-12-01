@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int CreamerId { get; set; }
 
+        [Display(Name = "Creamer Type")]
         public string CreamerType { get; set; }
 
         public int? Splashes { get; set; }

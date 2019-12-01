@@ -12,8 +12,10 @@ namespace KafeCruisers.Models
         [Key]
         public int SyrupId { get; set; }
 
+        [Display(Name = "Syrup Type")]
         public string SyrupType { get; set; }
 
+        [Display(Name = "Pumps")]
         public int? SyrupPumps { get; set; }
 
         public double? Price { get; set; }

@@ -13,8 +13,10 @@ namespace KafeCruisers.Models
         [Key]
         public int SauceId { get; set; }
 
+        [Display(Name = "Sauce Type")]
         public string SauceType { get; set; }
 
+        [Display(Name = "Pumps")]
         public int? SaucePumps { get; set; }
 
         public double? Price { get; set; }

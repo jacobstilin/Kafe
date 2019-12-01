@@ -2,59 +2,69 @@
     ViewBag.Title = "Home Page";
 }
 
+<style>
+    
+a.button{
+display:inline-block;
+padding:0.35em 1.2em;
+border:0.1em solid #FFFFFF;
+margin:0 0.3em 0.3em 0;
+border-radius:0.12em;
+box-sizing: border-box;
+text-decoration:none;
+font-family: 'Roboto', sans-serif;
+font-weight:400;
+color:#333333;
+text-align:center;
+transition: all 0.2s;
+background-color:#0063a9;
+}
+a.button:hover{
+color:#000000;
+background-color:#FFFFFF;
+}
+
+         
+</style>
+
 <div class="jumbotron">
     <h1>ASP.NET</h1>
 
 </div>
 
-<div>
-    @Html.ActionLink("Create Truck", "Create", "Truck")
-</div>
-<div>
-    @Html.ActionLink("Select Truck", "TruckSelector", "Truck")
-</div>
-<div>
-    @Html.ActionLink("Place Order", "StartOrder", "Order")
-</div>
-<div>
-    @Html.ActionLink("Add Menu Item", "AddMenuItem", "Menu")
-</div>
-<div>
-    @Html.ActionLink("Add Employee", "Create", "Employee")
-</div>
-<div>
-    @Html.ActionLink("Review Order Test", "TestReviewOrder", "Order")
-</div>
-<div>
-    @Html.ActionLink("Add Location", "AddLocation", "Location")
-</div>
-<div>
-    @Html.ActionLink("Customer Truck Select", "CustomerTruckSelector", "Truck")
-</div>
-<div>
-    @Html.ActionLink("Stripe Test", "CreateCharge", "Cart")
-</div>
-<br />
-<br />
-<br />
-<br />
+
 
 @if (ViewBag.role == "AppManager")
 {
     <div>
-        @Html.ActionLink("Select Truck", "TruckSelector", "Truck")
+        @Html.ActionLink("Select Truck", "TruckSelector", "Truck", null, new { @class="button" })
     </div>
     <div>
-        @Html.ActionLink("Add Location", "AddLocation", "Location")
+        @Html.ActionLink("Add Location", "AddLocation", "Location", null, new { @class="button" })
     </div>
 }
 
-@if (ViewBag.role == "Customer")
+else if (ViewBag.role == "Customer")
 {
     <div>
-        @Html.ActionLink("Place Order", "StartOrder", "Order")
+        @Html.ActionLink("Place Order", "StartOrder", "Order", null, new { @class = "button" })
     </div>
     <div>
-        @Html.ActionLink("Customer Truck Select", "CustomerTruckSelector", "Truck")
+        @Html.ActionLink("Customer Truck Select", "CustomerTruckSelector", "Truck", null, new { @class = "button" })
     </div>
 }
+
+else
+{
+<h3>
+    Welcome, Please @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+</h3>
+}
+
+
+
+
+
+<div>
+    @Html.ActionLink("Review Order Test", "TestReviewOrder", "Order", null, new { @class = "button" })
+</div>

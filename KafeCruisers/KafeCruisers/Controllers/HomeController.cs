@@ -1,5 +1,6 @@
 ﻿using KafeCruisers.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,33 +25,62 @@ namespace KafeCruisers.Controllers
         public ActionResult Index()
         {
             
-            if (User.IsInRole("AppManager") == true)
+            if (isAppManager())
             {
                 ViewBag.role = "AppManager";
             }
-            if (User.IsInRole("Customer") == true)
+            if (isCustomer())
             {
                 ViewBag.role = "Customer";
             }
-            else
+            else if(!isCustomer() && !isAppManager())
             {
                 ViewBag.role = "Visitor";
             }
             return View();
         }
 
-        public ActionResult About()
+        
+        public bool isAppManager()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "AppManager")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
+        public bool isCustomer()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Customer")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
+
     }
 }

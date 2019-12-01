@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int TemperatureId { get; set; }
 
+        [Display(Name = "Temperature Name")]
         public string TemperatureName { get; set; }
 
         [ForeignKey("MenuItem")]

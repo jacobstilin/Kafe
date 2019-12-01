@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Location.LocationId)
+
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TruckName)
@@ -27,18 +27,25 @@
     </tr>
 
 @foreach (var item in Model) {
+    
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.Location.LocationId)
+        @Html.ActionLink("View Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, null)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.TruckName)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.StartTime)
+        @{ 
+            string startString = item.StartTime.ToString("h:mm tt");
+        }
+        @Html.DisplayFor(modelItem => startString)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.EndTime)
+        @{
+            string endString = item.EndTime.ToString("h:mm tt");
+        }
+        @Html.DisplayFor(modelItem => endString)
     </td>
     <td>
         @Html.ActionLink("Add Menu Item For Truck", "AddMenuItem", "Menu", new { id = item.TruckId }, null)
@@ -46,9 +53,7 @@
     <td>
         @Html.ActionLink("Edit Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, null)
     </td>
-    <td>
-        @Html.ActionLink("View Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, null)
-    </td>
+
     <td>
         @Html.ActionLink("Set Location", "ViewLocations", "Location", new { id = item.TruckId }, null)
     </td>

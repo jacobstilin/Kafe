@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int DrizzleId { get; set; }
 
+        [Display(Name = "Drizzle Type")]
         public string DrizzleType { get; set; }
 
         public int? Drizzles { get; set; }

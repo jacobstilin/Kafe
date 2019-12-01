@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int SizeId { get; set; }
 
+        [Display(Name = "Size Name")]
         public string SizeName { get; set; }
 
         public double? AdditionalCost { get; set; }

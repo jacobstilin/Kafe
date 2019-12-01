@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int PowderId { get; set; }
 
+        [Display(Name = "Powder Type")]
         public string PowderType { get; set; }
 
         public int? Scoops { get; set; }

@@ -11,6 +11,7 @@ namespace KafeCruisers.Models
     {
         [Key]
         public int CardId { get; set; }
+        [Display(Name ="Card Name")]
         public string CardName { get; set; }
         public string Email { get; set; }
         public string StripeToken { get; set; }

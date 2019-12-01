@@ -1,15 +1,31 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Kafe Cruisers</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+<style type="text/css">
+    #header {
+        background-color: #0095ff;
+        height: 20%;
+        width: 100%;
+    }
+
+    div.navbar-inverse {
+        background-color: #004f88;
+        
+    }
+
+    body, html {
+        margin: 0;
+        background-color: #0095ff;
+    }
+</style>
 
 </head>
-<body>
+<body runat="server">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -20,21 +36,44 @@
                 </button>
                 @Html.ActionLink("Kafe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            @if (User.IsInRole("AppManager"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Trucks", "TruckSelector", "Truck")</li>
+                        <li>@Html.ActionLink("Locations", "AddLocation", "Location")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Order", "CustomerTruckSelector", "Truck")</li>
+                       
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
+            else { 
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+            }
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year -Kafe Cruisers</p>
         </footer>
     </div>
 

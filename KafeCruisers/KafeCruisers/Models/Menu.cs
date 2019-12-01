@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int MenuId { get; set; }
 
+        [Display(Name = "Menu Name")]
         public string MenuName { get; set; }
 
         [ForeignKey("Truck")]

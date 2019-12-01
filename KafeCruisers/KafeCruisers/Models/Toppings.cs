@@ -12,8 +12,10 @@ namespace KafeCruisers.Models
         [Key]
         public int ToppingsId { get; set; }
 
+        [Display(Name = "Toppings Type")]
         public string ToppingsType { get; set; }
 
+        [Display(Name = "Amount")]
         public int? ToppingsAmmount { get; set; }
 
         public double? Price { get; set; }

@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int ShotId { get; set; }
 
+        [Display(Name = "Shot Type")]
         public string ShotType { get; set; }
 
         public int? Shots { get; set; }

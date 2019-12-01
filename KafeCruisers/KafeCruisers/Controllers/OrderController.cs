@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Stripe;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace KafeCruisers.Controllers
 {
@@ -586,13 +587,15 @@ namespace KafeCruisers.Controllers
             Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == currentOrder.TruckId);
             double orderMinimumTime = GetOrderFillDuration(currentOrder);
 
-            if (DateTime.Now > truck.StartTime)
+            // Convert truck open time to the time on the current day
+
+            if (DateTime.Now.TimeOfDay > truck.StartTime.TimeOfDay)
             {
                 DateTime time = (DateTime.Now);
                 time.AddMinutes(orderMinimumTime);
                 ViewBag.TruckOpens = TimeConverter(time);
             }
-            if (DateTime.Now > truck.EndTime)
+            if (DateTime.Now.TimeOfDay > truck.EndTime.TimeOfDay)
             {
                 DateTime time = truck.StartTime;
                 time.AddMinutes(orderMinimumTime);
@@ -799,7 +802,7 @@ namespace KafeCruisers.Controllers
 
         public ActionResult TestReviewOrder()
         {
-            int id = 65;
+            int id = 68;
             return RedirectToAction("ReviewOrder", new { id = id });
 
         }
@@ -826,7 +829,51 @@ namespace KafeCruisers.Controllers
             return (unavaibs);
         }
 
-       
 
+
+
+
+        // The following methods are used for authentication
+
+        public bool isAppManager()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "AppManager")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+
+        public bool isCustomer()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Customer")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }
