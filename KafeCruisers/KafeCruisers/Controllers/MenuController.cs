@@ -37,7 +37,6 @@ namespace KafeCruisers.Controllers
             newMenuItem.Name = menuItem.Name;
             newMenuItem.Category = menuItem.Category;
             newMenuItem.MenuId = menu.MenuId;
-            newMenuItem.Duration = menuItem.Duration;
 
             if (menuItem.Price == null)
             {
@@ -47,9 +46,16 @@ namespace KafeCruisers.Controllers
             {
                 newMenuItem.Price = menuItem.Price;
             }
+            if (menuItem.Duration == null)
+            {
+                newMenuItem.Duration = 0;
+            }
+            else
+            {
+                newMenuItem.Price = menuItem.Price;
+            }
 
-            
-            
+
             db.MenuItems.Add(newMenuItem);
             db.SaveChanges();
 
@@ -58,7 +64,7 @@ namespace KafeCruisers.Controllers
                 return RedirectToAction("AddSizes", new { id = newMenuItem.MenuItemId });
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewTruckMenu", "Menu", new { id = menu.TruckId} );
             
         }
 
@@ -116,92 +122,56 @@ namespace KafeCruisers.Controllers
 
             menuItem.Temperatures = temperatures;
             db.SaveChanges();
+            Menu menu = db.Menus.FirstOrDefault(m => m.MenuId == menuItem.MenuId);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ViewTruckMenu", "Menu", new { id = menu.TruckId });
         }
 
 
-
-
-        // GET: Menu
-        public ActionResult Index(int id)
+        public ActionResult ViewTruckMenu(int id)
         {
-            Employee employee = GetLoggedInEmployee();
-            employee.MenuTruckId = id;
-            db.SaveChanges();
-            return RedirectToAction("AddMenuItem");
-        }
-
-        // GET: Menu/Details/5
-        public ActionResult Details(int id)
-        {
+            Menu currentMenu = db.Menus.FirstOrDefault(m => m.TruckId == id);
+            Truck currentTruck = db.Trucks.FirstOrDefault(t => t.TruckId == currentMenu.TruckId);
+            List<MenuItem> drinks = db.MenuItems.Where(i => i.Category == "Drink" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> creamers = db.MenuItems.Where(i => i.Category == "Creamer" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> sweeteners = db.MenuItems.Where(i => i.Category == "Sweetener" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> shots = db.MenuItems.Where(i => i.Category == "Shot" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> drizzles = db.MenuItems.Where(i => i.Category == "Drizzle" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> powders = db.MenuItems.Where(i => i.Category == "Powder" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> sauces = db.MenuItems.Where(i => i.Category == "Sauce" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> syrups = db.MenuItems.Where(i => i.Category == "Syrup" && i.MenuId == currentMenu.MenuId).ToList();
+            List<MenuItem> toppings = db.MenuItems.Where(i => i.Category == "Toppings" && i.MenuId == currentMenu.MenuId).ToList();
+            ViewBag.Drinks = drinks;
+            ViewBag.Creamers = creamers;
+            ViewBag.Sweeteners = sweeteners;
+            ViewBag.Shots = shots;
+            ViewBag.Drizzles = drizzles;
+            ViewBag.Powders = powders;
+            ViewBag.Sauce = sauces;
+            ViewBag.Syrups = syrups;
+            ViewBag.Toppings = toppings;
+            ViewBag.TruckId = currentTruck.TruckId;
             return View();
         }
 
-        // GET: Menu/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        
 
-        // POST: Menu/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Menu/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Menu/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         // GET: Menu/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteItem(int id)
         {
-            return View();
+            MenuItem menuItem = db.MenuItems.FirstOrDefault(i => i.MenuItemId == id);
+            Menu menu = db.Menus.FirstOrDefault(m => m.MenuId == menuItem.MenuId);
+            Truck currentTruck = db.Trucks.FirstOrDefault(t => t.TruckId == menu.TruckId);
+            db.MenuItems.Remove(menuItem);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewTruckMenu", new { id = currentTruck.TruckId });
         }
 
-        // POST: Menu/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

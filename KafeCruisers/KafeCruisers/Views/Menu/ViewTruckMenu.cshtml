@@ -1,0 +1,255 @@
+﻿@model IEnumerable<KafeCruisers.Models.MenuItem>
+
+@{
+    ViewBag.Title = "ViewTruckMenu";
+}
+
+<h2>Menu</h2>
+
+<div>
+    @Html.ActionLink("Add Menu Item", "AddMenuItem", new { id = ViewBag.TruckId })
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th></th>
+    </tr>
+    @{
+        var drinksList = ViewBag.Drinks as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in drinksList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+    @{
+        var creamersList = ViewBag.Creamers as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in creamersList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var sweetenersList = ViewBag.Sweeteners as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in sweetenersList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var shotsList = ViewBag.Shots as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in shotsList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var drizzlesList = ViewBag.Drizzles as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in drizzlesList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var powdersList = ViewBag.Powders as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in powdersList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var saucesList = ViewBag.Sauce as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in saucesList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var syrupsList = ViewBag.Syrups as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in syrupsList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+    @{
+        var toppingsList = ViewBag.Toppings as IEnumerable<KafeCruisers.Models.MenuItem>;
+    }
+    @foreach (var item in toppingsList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{ var priceString = string.Format("{0:0.00}", item.Price);}
+                @Html.DisplayFor(modelItem => priceString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Back to Trucks", "TruckSelector", "Truck")
+</div>

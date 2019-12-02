@@ -26,7 +26,7 @@
                 background-color: #FFFFFF;
             }
     </style>
-<h2>TruckSelector</h2>
+<h2>Trucks</h2>
 
 <p>
     @Html.ActionLink("Add Truck", "Create")
@@ -52,7 +52,7 @@
     
 <tr>
     <td>
-        @Html.ActionLink("View Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, null)
+        @Html.ActionLink("Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, null)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.TruckName)
@@ -70,7 +70,7 @@
         @Html.DisplayFor(modelItem => endString)
     </td>
     <td>
-        @Html.ActionLink("Add Menu Item", "AddMenuItem", "Menu", new { id = item.TruckId }, null)
+        @Html.ActionLink("View Menu", "ViewTruckMenu", "Menu", new { id = item.TruckId }, null)
     </td>
     <td>
         @Html.ActionLink("Edit Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, null)
