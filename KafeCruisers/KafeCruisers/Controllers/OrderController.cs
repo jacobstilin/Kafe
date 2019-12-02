@@ -106,7 +106,7 @@ namespace KafeCruisers.Controllers
 
 
 
-                return RedirectToAction("EditCreamers");
+                return RedirectToAction("ReviewOrder", new { id = newOrderItem.OrderItemId });
             }
             catch
             {
@@ -156,7 +156,7 @@ namespace KafeCruisers.Controllers
             orderItem.Creamers = creamerList;
 
             db.SaveChanges();
-            return RedirectToAction("EditShots");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -199,7 +199,7 @@ namespace KafeCruisers.Controllers
             orderItem.Shots = shotList;
 
             db.SaveChanges();
-            return RedirectToAction("EditSweeteners");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -242,7 +242,7 @@ namespace KafeCruisers.Controllers
             orderItem.Sweeteners = sweetenerList;
 
             db.SaveChanges();
-            return RedirectToAction("EditSauces");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -286,7 +286,7 @@ namespace KafeCruisers.Controllers
             orderItem.Sauces = sauceList;
 
             db.SaveChanges();
-            return RedirectToAction("EditSyrups");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -330,7 +330,7 @@ namespace KafeCruisers.Controllers
             orderItem.Syrups = syrupList;
 
             db.SaveChanges();
-            return RedirectToAction("EditDrizzles");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -376,7 +376,7 @@ namespace KafeCruisers.Controllers
             orderItem.Drizzles = drizzleList;
 
             db.SaveChanges();
-            return RedirectToAction("EditPowders");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -420,7 +420,7 @@ namespace KafeCruisers.Controllers
             orderItem.Powders = powderList;
 
             db.SaveChanges();
-            return RedirectToAction("EditToppings");
+            return RedirectToAction("ReviewOrder", new { id = orderItem.OrderItemId });
         }
 
 
@@ -481,7 +481,10 @@ namespace KafeCruisers.Controllers
 
             MenuItem menuItem = db.MenuItems.FirstOrDefault(m => m.MenuItemId == orderItem.IdFromMenu);
             double? sizePrice = db.Sizes.FirstOrDefault(s => s.MenuItemId == menuItem.MenuItemId && s.SizeName == orderItem.Size).AdditionalCost;
-            
+            if (sizePrice == null)
+            {
+                sizePrice = 0;
+            }
             ICollection <Creamer> creamerList = db.Creamers.Where(c => c.OrderItemId == orderItem.OrderItemId && c.Splashes != 0).ToList();
             ViewBag.creamers = creamerList;
             foreach (var item in creamerList) { additionsPrice += item.Price; }
@@ -580,6 +583,15 @@ namespace KafeCruisers.Controllers
             db.SaveChanges();
             return View(currentOrderItems);
              
+        }
+
+        public ActionResult RemoveOrderItem(int id)
+        {
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            db.OrderItems.Remove(orderItem);
+            db.SaveChanges();
+            return RedirectToAction("ReviewOrderBeforeCheckout");
+
         }
 
 
@@ -768,6 +780,17 @@ namespace KafeCruisers.Controllers
         }
 
 
+        public ActionResult ResumeOrder()
+        {
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.Order order = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
+
+            if(order.UniqueId != null)
+            {
+                return RedirectToAction("UniqueIdScreen");
+            }
+            return RedirectToAction("ReviewOrderBeforeCheckout");
+        }
 
 
 
@@ -780,6 +803,8 @@ namespace KafeCruisers.Controllers
         public ActionResult OrderFilled(int id)
         {
             Models.Order filledOrder = db.Orders.FirstOrDefault(o => o.OrderId == id);
+            Models.Customer customer = db.Customers.FirstOrDefault(c => c.CurrentOrderId == id);
+            customer.CurrentOrderId = null;
             filledOrder.UniqueId = null;
             db.SaveChanges();
             return RedirectToAction("ViewTruckOrders", "Truck", new { id = filledOrder.TruckId });

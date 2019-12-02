@@ -20,6 +20,13 @@ namespace KafeCruisers.Controllers
             return (employee);
         }
 
+        public Models.Customer GetLoggedInCustomer()
+        {
+            string currentId = User.Identity.GetUserId();
+            Models.Customer customer = db.Customers.FirstOrDefault(u => u.ApplicationId == currentId);
+            return (customer);
+        }
+
 
         [AllowAnonymous]
         public ActionResult Index()
@@ -31,6 +38,11 @@ namespace KafeCruisers.Controllers
             }
             if (isCustomer())
             {
+                Customer customer = GetLoggedInCustomer();
+                if (customer.CurrentOrderId != null)
+                {
+                    ViewBag.Resume = true;
+                }
                 ViewBag.role = "Customer";
             }
             else if(!isCustomer() && !isAppManager())

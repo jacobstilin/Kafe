@@ -4,8 +4,10 @@
 }
 
 <h2>Thank you for your purchase!</h2>
-
-<p>Your Order will be ready at @Model.FillTime</p>
+@{ 
+    var fillTime = Model.FillTime.ToString("h:mm tt");
+}
+<p>Your Order will be ready at @fillTime</p>
 
 <p>Your Order ID is:</p>
 
