@@ -18,6 +18,7 @@ namespace KafeCruisers.Models
 
         public int IdFromMenu { get; set; }
 
+        [Display(Name = "Drink")]
         public string ItemName { get; set; }
 
         public string Size { get; set; }
@@ -30,6 +31,7 @@ namespace KafeCruisers.Models
 
         public string Temperature { get; set; }
 
+        [Display(Name = "Whipped Cream")]
         public bool WhippedCream { get; set; }
 
         public double? Price { get; set; }

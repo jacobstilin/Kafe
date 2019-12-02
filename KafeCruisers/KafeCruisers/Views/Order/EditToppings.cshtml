@@ -2,8 +2,17 @@
 @{
     ViewBag.Title = "EditToppings";
 }
+    <style>
+        input.form-control {
+            width: 50%;
+            float: right;
+        }
 
-<h2>EditToppings</h2>
+        td {
+            width: 50%;
+        }
+    </style>
+<h2>Toppings</h2>
 
 
 
@@ -20,7 +29,7 @@
         <table class="table">
             <tr>
                 <th>
-                    <h4>Toppings Type</h4>
+                    <h4>Toppings</h4>
                 </th>
                 <th>
                     <h4>Quantity</h4>
@@ -39,7 +48,7 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            @Html.LabelFor(modelItem => Model[i].Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                            
                             <div class="col-md-10">
                                 @Html.EditorFor(modelItem => Model[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(modelItem => Model[i].Quantity, "", new { @class = "text-danger" })

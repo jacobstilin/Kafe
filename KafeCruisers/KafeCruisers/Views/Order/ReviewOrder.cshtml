@@ -3,6 +3,30 @@
 @{
     ViewBag.Title = "ReviewOrder";
 }
+<style>
+    dl  {
+    
+    overflow: auto;
+}
+
+dt  {
+   display: inline-block;
+   width: 37%;
+   text-align: right;
+   white-space: nowrap;
+}
+
+dd {
+   width: 50%;
+   display: inline-block;
+   white-space: nowrap;
+   margin-left: 40px;
+}
+
+a.button {
+    width: 100%;
+}
+</style>
 
 <h2>Review Drink</h2>
 
@@ -13,7 +37,8 @@
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.ItemName)
+            @{ string Drink = "Drink"; }
+            @Html.DisplayNameFor(model => Drink)
         </dt>
 
         <dd>
@@ -33,7 +58,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Room)
+            @{var room = "No";
+
+                if (Model.Room == true)
+                {
+                    room = "Yes";
+                }
+            }
+            @Html.DisplayFor(model => room)
         </dd>
 
         <dt>
@@ -41,7 +73,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Decaf)
+            @{var decaf = "No";
+
+                if (Model.Decaf == true)
+                {
+                    decaf = "Yes";
+                }
+            }
+            @Html.DisplayFor(model => decaf)
         </dd>
 
 
@@ -59,16 +98,23 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WhippedCream)
+            @{var whipped = "No";
+
+                if (Model.WhippedCream == true)
+                {
+                    whipped = "Yes";
+                }
+            }
+            @Html.DisplayFor(model => whipped)
         </dd>
 
         <dt>
-            <h2>Price</h2>
+            Price
         </dt>
 
         <dd>
-            @{  double? price = ViewBag.price; }
-            @Html.DisplayFor(model => price)
+            @{  var priceString = string.Format("{0:0.00}", ViewBag.price); }
+            $@Html.DisplayFor(model => priceString)
         </dd>
 
         @{
@@ -268,33 +314,32 @@
 </div>
 
 <div>
-    @Html.ActionLink("Add Creamer", "EditCreamers", "Order")
+    @Html.ActionLink("Add Creamer", "EditCreamers", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Sweetener", "EditSweeteners", "Order")
+    @Html.ActionLink("Add Sweetener", "EditSweeteners", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Shots", "EditShots", "Order")
+    @Html.ActionLink("Add Shots", "EditShots", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Sauces", "EditSauces", "Order")
+    @Html.ActionLink("Add Sauces", "EditSauces", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Syrups", "EditSyrups", "Order")
+    @Html.ActionLink("Add Syrups", "EditSyrups", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Drizzle", "EditDrizzles", "Order")
+    @Html.ActionLink("Add Drizzle", "EditDrizzles", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Powders", "EditPowders", "Order")
+    @Html.ActionLink("Add Powders", "EditPowders", "Order", null, new { @class = "button" })
 </div>
 <div>
-    @Html.ActionLink("Add Toppings", "EditToppings", "Order")
+    @Html.ActionLink("Add Toppings", "EditToppings", "Order", null, new { @class = "button" })
 </div>
+<br />
 
+<br />
 <p>
-    @Html.ActionLink("Add Another Drink", "AdditionalDrink", "Order")
-</p>
-<p>
-    @Html.ActionLink("Review Items", "ReviewOrderBeforeCheckout", "Order")
+    @Html.ActionLink("Proceed", "ReviewOrderBeforeCheckout", "Order", null, new { @class = "button" })
 </p>

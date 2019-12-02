@@ -3,15 +3,12 @@
     ViewBag.Title = "AdditionalDrink";
 }
 
-<h2>AdditionalDrink</h2>
+<h2>Drinks</h2>
 
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -26,13 +23,13 @@
         @Html.DisplayFor(modelItem => item.Name)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Category)
+        @{
+            var priceString = string.Format("{0:0.00}", item.Price);
+        }
+        @Html.DisplayFor(modelItem => priceString)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.ActionLink("Select", "EditOrderItem", "Order", new { id = item.MenuItemId }, null)
+        @Html.ActionLink("Select", "EditOrderItem", "Order", new { id = item.MenuItemId }, new { @class = "button" })
 
     </td>
 </tr>

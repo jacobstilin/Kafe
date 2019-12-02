@@ -3,7 +3,7 @@
     ViewBag.Title = "FinalOrderReview";
 }
 
-<h2>FinalOrderReview</h2>
+<h2>Order Review</h2>
 
 <table class="table">
     <tr>
@@ -27,20 +27,23 @@
         @Html.DisplayFor(modelItem => item.Price)
     </td>
     <td>
-        @Html.ActionLink("View Details", "ReviewSelectedItem", "Order", new { id = item.OrderItemId }, null)
+        @Html.ActionLink("View Details", "ReviewSelectedItem", "Order", new { id = item.OrderItemId }, new { @class = "button" })
 
     </td>
 </tr>
     }
 
-    <p>
-        Order Ready At: @ViewBag.Time
-    </p>
+<p>
+    @{
+        string timeString = ViewBag.Time.ToString("h:mm tt");
+    }
+    Order Ready At: @timeString
+</p>
 
     <p>
-        @Html.ActionLink("Place Order", "OrderAccepted", "Order")
+        @Html.ActionLink("Place Order", "OrderAccepted", "Order", null, new { @class = "button" })
     </p>
     <p>
-        @Html.ActionLink("Cancel Order", "OrderCancelled", "Order")
+        @Html.ActionLink("Cancel Order", "OrderCancelled", "Order", null, new { @class = "button" })
     </p>
 </table>

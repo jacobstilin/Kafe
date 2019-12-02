@@ -3,29 +3,7 @@
 @{
     ViewBag.Title = "TruckSelector";
 }
-    <style>
-        
-        a.button {
-            display: inline-block;
-            padding: 0.35em 1.2em;
-            border: 0.1em solid #FFFFFF;
-            margin: 0 0.3em 0.3em 0;
-            border-radius: 0.12em;
-            box-sizing: border-box;
-            text-decoration: none;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            color: #333333;
-            text-align: center;
-            transition: all 0.2s;
-            background-color: #0063a9;
-        }
-
-            a.button:hover {
-                color: #000000;
-                background-color: #FFFFFF;
-            }
-    </style>
+    
 <h2>Trucks</h2>
 
 <p>
@@ -52,7 +30,7 @@
     
 <tr>
     <td>
-        @Html.ActionLink("Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, null)
+        @Html.ActionLink("Orders", "ViewTruckOrders", "Truck", new { id = item.TruckId }, new { @class = "button" })
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.TruckName)
@@ -70,14 +48,14 @@
         @Html.DisplayFor(modelItem => endString)
     </td>
     <td>
-        @Html.ActionLink("View Menu", "ViewTruckMenu", "Menu", new { id = item.TruckId }, null)
+        @Html.ActionLink("View Menu", "ViewTruckMenu", "Menu", new { id = item.TruckId }, new { @class = "button" })
     </td>
     <td>
-        @Html.ActionLink("Edit Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, null)
+        @Html.ActionLink("Edit Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, new { @class = "button" })
     </td>
 
     <td>
-        @Html.ActionLink("Set Location", "ViewLocations", "Location", new { id = item.TruckId }, null)
+        @Html.ActionLink("Set Location", "ViewLocations", "Location", new { id = item.TruckId }, new { @class = "button" })
     </td>
 </tr>
 }

@@ -600,21 +600,21 @@ namespace KafeCruisers.Controllers
             Models.Customer currentCustomer = GetLoggedInCustomer();
             Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == currentOrder.TruckId);
-            double orderMinimumTime = GetOrderFillDuration(currentOrder);
+            double orderMinimumTime = GetOrderFillDuration(currentOrder) + 5;  
 
             // Convert truck open time to the time on the current day
 
             if (DateTime.Now.TimeOfDay > truck.StartTime.TimeOfDay)
             {
                 DateTime time = (DateTime.Now);
-                time.AddMinutes(orderMinimumTime);
-                ViewBag.TruckOpens = TimeConverter(time);
+                DateTime newTime = time.AddMinutes(orderMinimumTime);
+                ViewBag.TruckOpens = TimeConverter(newTime);
             }
             if (DateTime.Now.TimeOfDay > truck.EndTime.TimeOfDay)
             {
                 DateTime time = truck.StartTime;
-                time.AddMinutes(orderMinimumTime);
-                ViewBag.TruckOpens = TimeConverter(time);
+                DateTime newTime = time.AddMinutes(orderMinimumTime);
+                ViewBag.TruckOpens = TimeConverter(newTime);
             }
             
             ViewBag.TruckCloses = TimeConverter(truck.EndTime);
@@ -796,7 +796,11 @@ namespace KafeCruisers.Controllers
 
         public ActionResult OrderCancelled()
         {
-            return View();
+            Models.Customer customer = GetLoggedInCustomer();
+            Models.Order order = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
+            customer.CurrentOrderId = null;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
 

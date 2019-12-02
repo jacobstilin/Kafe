@@ -2,27 +2,35 @@
 @{
     ViewBag.Title = "OrderAccepted";
 }
-
+    <style>
+        a.button {
+            width: 100%;
+        }
+    </style>
+<h2>Payment Method</h2>
 <div>
 
-    <hr />
-    <dl class="dl-horizontal">
+    <br />
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <td>Card on File:</td>
+            <td>@Html.DisplayFor(model => model.CardName)</td>
+            <td>@Html.ActionLink("Use This Card", "UsePreloadedCard", "Order", null, new { @class = "button" })</td>
+
+        </tr>
+    </table>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CardName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CardName)
-        </dd>
 
-        <dd>
-            @Html.ActionLink("Use This Card", "UsePreloadedCard", "Order")
-        </dd>
-    </dl>
+
+
+
+
 </div>
 
 <div>
-    @Html.ActionLink("Set Up New Card", "SetUpStripe", "Order")
+    @Html.ActionLink("Set Up New Card", "SetUpStripe", "Order", null, new { @class = "button" })
 </div>

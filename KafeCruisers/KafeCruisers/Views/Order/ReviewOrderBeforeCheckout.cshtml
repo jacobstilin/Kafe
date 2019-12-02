@@ -3,6 +3,29 @@
     ViewBag.Title = "ReviewOrderBeforeCheckout";
 }
 
+    <style>
+        a.button1 {
+            display: inline-block;
+            padding: 0.35em 1.2em;
+            border: 0.1em solid #FFFFFF;
+            margin: 0 0.3em 0.3em 0;
+            border-radius: 0.12em;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            color: #333333;
+            text-align: center;
+            transition: all 0.2s;
+            background-color: #0063a9;
+            width: 100%;
+        }
+
+            a.button1:hover {
+                color: #000000;
+                background-color: #FFFFFF;
+            }
+    </style>
 <h2>Review Order</h2>
 
 
@@ -26,31 +49,35 @@
                 @Html.DisplayFor(modelItem => item.ItemName)
             </td>
             <td>
-                @{ 
+                @{
                     var priceString = string.Format("{0:0.00}", item.Price);
                 }
                 @Html.DisplayFor(modelItem => priceString)
             </td>
             <td>
-                @Html.ActionLink("View Details", "ReviewOrder", "Order", new { id = item.OrderItemId }, null)
+                @Html.ActionLink("Details", "ReviewOrder", "Order", new { id = item.OrderItemId }, new { @class = "button" })
             </td>
             <td>
-                @Html.ActionLink("Remove", "RemoveOrderItem", "Order", new { id = item.OrderItemId }, null)
+                @Html.ActionLink("Remove", "RemoveOrderItem", "Order", new { id = item.OrderItemId }, new { @class = "button" })
             </td>
         </tr>
     }
 
     <p>
-        @Html.ActionLink("Schedule Pick Up Time", "SchedulePickUp", "Order")
+        @Html.ActionLink("Schedule Pick Up Time", "SchedulePickUp", "Order", null, new { @class = "button1" })
     </p>
 
 </table>
 
-@{ 
+@{
     var totalString = string.Format("{0:0.00}", ViewBag.TotalOrderPrice);
 }
 <p>Total Price: $@totalString</p>
 
 <p>
-    @Html.ActionLink("Add Another Drink", "AdditionalDrink", "Order")
+    @Html.ActionLink("Add Another Drink", "AdditionalDrink", "Order", null, new { @class = "button1" })
+</p>
+
+<p>
+    @Html.ActionLink("Cancel Order", "OrderCancelled", "Order", null, new { @class = "button1" })
 </p>

@@ -4,7 +4,28 @@
     ViewBag.Title = "EditOrderItem";
 }
 
-<h2>EditOrderItem</h2>
+    <style>
+        div.form-group {
+            overflow: auto;
+        }
+
+        div.col-md-10 {
+            display: inline-block;
+            text-align: right;
+            white-space: nowrap;
+            float: right;
+        }
+
+        dd {
+            width: 50%;
+            display: inline-block;
+            white-space: nowrap;
+            margin-left: 40px;
+            float: right;
+        }
+    </style>
+
+<h2>Drink Options</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +33,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>OrderItem</h4>
+    
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.OrderId)
@@ -80,7 +101,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to Menu", "AdditionalDrink", "Order")
+    @Html.ActionLink("Back to Menu", "AdditionalDrink", "Order", null, new { @class = "button" })
 </div>
 
 @section Scripts {
