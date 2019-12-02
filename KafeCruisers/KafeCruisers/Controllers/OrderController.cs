@@ -74,6 +74,7 @@ namespace KafeCruisers.Controllers
             orderItem.ItemName = menuItem.Name;
             orderItem.Price = menuItem.Price;
             orderItem.IdFromMenu = id;
+            orderItem.Duration = menuItem.Duration;
             db.OrderItems.Add(orderItem);
             db.SaveChanges();
             customer.CurrentOrderItemId = orderItem.OrderItemId;
@@ -568,10 +569,12 @@ namespace KafeCruisers.Controllers
             Models.Order customerOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             List<Models.OrderItem> currentOrderItems = db.OrderItems.Where(o => o.OrderId == customerOrder.OrderId).ToList();
             customerOrder.OrderPrice = 0;
+            customerOrder.Duration = 1;
 
             for (int i = 0; i < currentOrderItems.Count(); i++)
             {
                 customerOrder.OrderPrice += currentOrderItems[i].Price;
+                customerOrder.Duration += currentOrderItems[i].Duration;
             }
             ViewBag.TotalOrderPrice = customerOrder.OrderPrice;
             db.SaveChanges();
@@ -790,12 +793,8 @@ namespace KafeCruisers.Controllers
 
         public double GetOrderFillDuration(Models.Order order)
         {
-            double minutes = 0;
-            List<Models.OrderItem> orderItems = db.OrderItems.Where(o => o.OrderId == order.OrderId).ToList();
-            foreach (Models.OrderItem orderItem in orderItems)
-            {
-                minutes += 1;
-            }
+            double minutes = Convert.ToDouble(order.Duration);
+            
             return (minutes);
         }
 

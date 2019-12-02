@@ -37,6 +37,7 @@ namespace KafeCruisers.Controllers
             newMenuItem.Name = menuItem.Name;
             newMenuItem.Category = menuItem.Category;
             newMenuItem.MenuId = menu.MenuId;
+            newMenuItem.Duration = menuItem.Duration;
 
             if (menuItem.Price == null)
             {

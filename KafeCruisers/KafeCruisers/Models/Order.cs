@@ -12,6 +12,7 @@ namespace KafeCruisers.Models
         [Key]
         public int OrderId { get; set; }
 
+        [Display(Name = "ID")]
         public int? UniqueId { get; set; }
 
         [Display(Name = "Start Time")]
@@ -20,6 +21,7 @@ namespace KafeCruisers.Models
         [Display(Name = "Fill Time")]
         public DateTime FillTime { get; set; }
 
+        [Display(Name = "Price")]
         public double? OrderPrice { get; set;
         }
         [ForeignKey("Truck")]
@@ -30,6 +32,6 @@ namespace KafeCruisers.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         
-
+        public int? Duration { get; set; }
     }
 }

@@ -42,7 +42,7 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Trucks", "TruckSelector", "Truck")</li>
-                        <li>@Html.ActionLink("Locations", "AddLocation", "Location")</li>
+                        <li>@Html.ActionLink("Locations", "LocationsList", "Location")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -73,7 +73,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year -Kafe Cruisers</p>
+            <p>&copy; @DateTime.Now.Year - Kafe Cruisers</p>
         </footer>
     </div>
 

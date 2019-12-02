@@ -113,7 +113,7 @@ namespace KafeCruisers.Controllers
             Customer customer = GetLoggedInCustomer();
             customer.OrderTruckId = id;
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("StartOrder", "Order");
         }
 
 

@@ -4,10 +4,34 @@
     ViewBag.Title = "LocationsList";
 }
 
-<h2>LocationsList</h2>
+    <style>
+
+        a.button {
+            display: inline-block;
+            padding: 0.35em 1.2em;
+            border: 0.1em solid #FFFFFF;
+            margin: 0 0.3em 0.3em 0;
+            border-radius: 0.12em;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            color: #333333;
+            text-align: center;
+            transition: all 0.2s;
+            background-color: #0063a9;
+        }
+
+            a.button:hover {
+                color: #000000;
+                background-color: #FFFFFF;
+            }
+    </style>
+
+<h2>Locations</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Location", "AddLocation", "Location", new { @class = "button" })
 </p>
 <table class="table">
     <tr>
@@ -35,9 +59,7 @@
             @Html.DisplayFor(modelItem => item.Latitude)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LocationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LocationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LocationId })
+            @Html.ActionLink("Delete", "Delete", null, new { id=item.LocationId, @class = "button" })
         </td>
     </tr>
 }

@@ -7,7 +7,7 @@
 <style>
 
     #map {
-        height: 500px;
+        height: 400px;
     }
 
     html, body {
@@ -16,16 +16,18 @@
         padding: 0;
     }
 </style>
-
-<h2>CustomerTruckSelector</h2>
-
+<br />
+<br />
+<br />
+<h3>Select a truck from which to place your order</h3>
+<br />
 <div id="map"></div>
 
 @section Scripts {
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <script type="text/javascript">
-        
+
         var points = @Html.Raw(ViewBag.coordinates);
 
 
@@ -38,7 +40,7 @@
 
 
             for (var i = 0; i < locations.length; i++) {
-                
+
 
 
                 var place = locations[i];
@@ -66,8 +68,8 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
             var map = new google.maps.Map(document.getElementById('map'), myOptions);
-                
-            
+
+
             setMarkers(map, points);
         }
 
