@@ -2,7 +2,11 @@
     ViewBag.Title = "Home Page";
 }
 
-
+<style>
+    a.button {
+        width: 100%;
+    }
+</style>
 
 <div class="jumbotron">
     <h1>Kafe Cruisers</h1>
@@ -14,10 +18,10 @@
 @if (ViewBag.role == "AppManager")
 {
     <div>
-        @Html.ActionLink("Select Truck", "TruckSelector", "Truck", null, new { @class = "button" })
+        @Html.ActionLink("Trucks", "TruckSelector", "Truck", null, new { @class = "button" })
     </div>
     <div>
-        @Html.ActionLink("Add Location", "AddLocation", "Location", null, new { @class = "button" })
+        @Html.ActionLink("Locations", "LocationsList", "Location", null, new { @class = "button" })
     </div>
 }
 

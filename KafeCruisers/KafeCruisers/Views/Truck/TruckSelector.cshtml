@@ -3,11 +3,16 @@
 @{
     ViewBag.Title = "TruckSelector";
 }
-    
+  <style>
+      table.table {
+          width: 100%;
+      }
+      
+  </style>  
 <h2>Trucks</h2>
 
 <p>
-    @Html.ActionLink("Add Truck", "Create")
+    @Html.ActionLink("Add Truck", "Create", null, new { @class = "button" })
 </p>
 <table class="table">
     <tr>
@@ -48,14 +53,14 @@
         @Html.DisplayFor(modelItem => endString)
     </td>
     <td>
-        @Html.ActionLink("View Menu", "ViewTruckMenu", "Menu", new { id = item.TruckId }, new { @class = "button" })
+        @Html.ActionLink("Menu", "ViewTruckMenu", "Menu", new { id = item.TruckId }, new { @class = "button" })
     </td>
     <td>
-        @Html.ActionLink("Edit Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, new { @class = "button" })
+        @Html.ActionLink("Hours", "EditTruckHours", "Truck", new { id = item.TruckId }, new { @class = "button" })
     </td>
 
     <td>
-        @Html.ActionLink("Set Location", "ViewLocations", "Location", new { id = item.TruckId }, new { @class = "button" })
+        @Html.ActionLink("Location", "ViewLocations", "Location", new { id = item.TruckId }, new { @class = "button" })
     </td>
 </tr>
 }
