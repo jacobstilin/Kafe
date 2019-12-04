@@ -3,7 +3,7 @@
     ViewBag.Title = "ViewOrderItem";
 }
 
-<h2>ViewOrderItem</h2>
+<h2>View Order Item</h2>
 
 <div>
 
@@ -12,7 +12,8 @@
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.ItemName)
+            @{ string Drink = "Drink"; }
+            @Html.DisplayNameFor(model => Drink)
         </dt>
 
         <dd>
@@ -32,7 +33,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Room)
+            @{var room = "No";
+
+                if (Model.Room == true)
+                {
+                    room = "Yes";
+                }
+            }
+            @Html.DisplayFor(model => room)
         </dd>
 
         <dt>
@@ -40,7 +48,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Decaf)
+            @{var decaf = "No";
+
+                if (Model.Decaf == true)
+                {
+                    decaf = "Yes";
+                }
+            }
+            @Html.DisplayFor(model => decaf)
         </dd>
 
 
@@ -58,16 +73,23 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WhippedCream)
+            @{var whipped = "No";
+
+                if (Model.WhippedCream == true)
+                {
+                    whipped = "Yes";
+                }
+            }
+            @Html.DisplayFor(model => whipped)
         </dd>
 
         <dt>
-            <h2>Price</h2>
+            Price
         </dt>
 
         <dd>
-            @{ double? price = ViewBag.price; }
-            @Html.DisplayFor(model => price)
+            @{ var priceString = string.Format("{0:0.00}", ViewBag.price); }
+            $@Html.DisplayFor(model => priceString)
         </dd>
 
         @{

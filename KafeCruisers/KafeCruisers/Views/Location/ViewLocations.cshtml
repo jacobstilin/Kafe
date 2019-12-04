@@ -31,7 +31,7 @@
 <h2>ViewLocations</h2>
 
 <p>
-    @Html.ActionLink("Add New Location", "AddLocation", "Location")
+    @Html.ActionLink("Add New Location", "AddLocation", "Location", null, new { @class = "button" })
 </p>
 <table class="table">
     <tr>
@@ -59,7 +59,7 @@
             @Html.DisplayFor(modelItem => item.Latitude)
         </td>
         <td>
-            @Html.ActionLink("Set Truck To This Location", "SetLocation", "Truck", new { @class = "button", id=item.LocationId, truckId = ViewBag.truck }, null)
+            @Html.ActionLink("Set Truck To This Location", "SetLocation", "Truck", new { id=item.LocationId, truckId = ViewBag.truck }, new { @class = "button" })
         </td>
     </tr>
 }

@@ -4,7 +4,7 @@
     ViewBag.Title = "ViewTruckOrders";
 }
 
-<h2>ViewTruckOrders</h2>
+<h2>View Truck Orders</h2>
 
 
 <table class="table">
@@ -42,7 +42,8 @@
         @Html.DisplayFor(modelItem => fillString)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.OrderPrice)
+        @{ var priceString = string.Format("{0:0.00}", item.OrderPrice); }
+        $@Html.DisplayFor(model => priceString)
     </td>
     <td>
         @Html.ActionLink("View Order", "ViewOrderItems", new { id = item.OrderId })
@@ -56,5 +57,5 @@
 </table>
 
 <td>
-    @Html.ActionLink("Back To Truck List", "TruckSelector", "Truck")
+    @Html.ActionLink("Back To Truck List", "TruckSelector", "Truck", null, new { @class = "button" })
 </td>

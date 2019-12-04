@@ -594,6 +594,13 @@ namespace KafeCruisers.Controllers
 
         }
 
+        public void RemoveIncompleteItem(int id)
+        {
+            Models.OrderItem orderItem = db.OrderItems.FirstOrDefault(o => o.OrderItemId == id);
+            db.OrderItems.Remove(orderItem);
+            db.SaveChanges();
+        }
+
 
         public ActionResult SchedulePickUp()
         {
@@ -656,7 +663,9 @@ namespace KafeCruisers.Controllers
         {
             Models.Customer currentCustomer = GetLoggedInCustomer();
             Models.Order setTimeOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
+            double orderMinimumTime = GetOrderFillDuration(setTimeOrder);
             setTimeOrder.FillTime = order.FillTime;
+            setTimeOrder.StartTime = order.FillTime.AddMinutes(orderMinimumTime * -1);
             db.SaveChanges();
             return RedirectToAction("FinalOrderReview");
         }
@@ -707,7 +716,7 @@ namespace KafeCruisers.Controllers
                 Amount = Convert.ToInt64(currentOrder.OrderPrice * 100),
                 Currency = "usd",
                 Customer = currentCustomer.CustomerStripeId,
-                Description = "Aow",
+                Description = "Order for " + currentCustomer.FirstName + " " + currentCustomer.lastName,
             };
             var service = new ChargeService();
             Charge charge = service.Create(options);
@@ -753,7 +762,7 @@ namespace KafeCruisers.Controllers
                 Amount = Convert.ToInt64(currentOrder.OrderPrice * 100),
                 Currency = "usd",
                 Customer = currentCustomer.CustomerStripeId, // Have to pass in customer ID since token can't be called twice
-                Description = "Aow",
+                Description = "Order for " + currentCustomer.FirstName + " " + currentCustomer.lastName,
             };
             var createService = new ChargeService();
             Charge charge = createService.Create(createOptions);
@@ -785,9 +794,20 @@ namespace KafeCruisers.Controllers
             Models.Customer customer = GetLoggedInCustomer();
             Models.Order order = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
 
+            List<Models.OrderItem> incompleteOrders = db.OrderItems.Where(o => o.Size == null).ToList();
+            foreach (Models.OrderItem item in incompleteOrders)
+            {
+                db.OrderItems.Remove(item);
+                db.SaveChanges();
+            }
+
             if(order.UniqueId != null)
             {
                 return RedirectToAction("UniqueIdScreen");
+            }
+            if(order.FillTime >= DateTime.Now)
+            {
+                return RedirectToAction("FinalOrderReview");
             }
             return RedirectToAction("ReviewOrderBeforeCheckout");
         }
@@ -807,9 +827,15 @@ namespace KafeCruisers.Controllers
         public ActionResult OrderFilled(int id)
         {
             Models.Order filledOrder = db.Orders.FirstOrDefault(o => o.OrderId == id);
-            Models.Customer customer = db.Customers.FirstOrDefault(c => c.CurrentOrderId == id);
-            customer.CurrentOrderId = null;
-            filledOrder.UniqueId = null;
+            try {
+                Models.Customer customer = db.Customers.FirstOrDefault(c => c.CurrentOrderId == id);
+                customer.CurrentOrderId = null;
+            }
+            catch
+            {
+                
+            }
+            filledOrder.UniqueId = -1;
             db.SaveChanges();
             return RedirectToAction("ViewTruckOrders", "Truck", new { id = filledOrder.TruckId });
         }

@@ -37,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.Latitude)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", null, new { id=item.LocationId, @class = "button" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.LocationId }, new { @class = "button" })
         </td>
     </tr>
 }

@@ -7,7 +7,7 @@
 <h2>Menu</h2>
 
 <div>
-    @Html.ActionLink("Add Menu Item", "AddMenuItem", new { id = ViewBag.TruckId })
+    @Html.ActionLink("Add Menu Item", "AddMenuItem", new { id = ViewBag.TruckId }, new { @class = "button" })
 </div>
 <table class="table">
     <tr>
@@ -251,5 +251,5 @@
 </table>
 
 <div>
-    @Html.ActionLink("Back to Trucks", "TruckSelector", "Truck")
+    @Html.ActionLink("Back to Trucks", "TruckSelector", "Truck", null, new { @class = "button" })
 </div>

@@ -3,7 +3,7 @@
     ViewBag.Title = "ViewOrderItems";
 }
 
-<h2>ViewOrderItems</h2>
+<h2>View Order Items</h2>
 
 <table class="table">
     <tr>
@@ -24,7 +24,8 @@
                 @Html.DisplayFor(modelItem => item.ItemName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @{ var priceString = string.Format("{0:0.00}", item.Price); }
+                $@Html.DisplayFor(model => priceString)
             </td>
             <td>
                 @Html.ActionLink("View Details", "ReviewSelectedItemByEmployee", "Order", new { id = item.OrderItemId }, null)

@@ -61,7 +61,7 @@ namespace KafeCruisers.Controllers
                 db.Menus.Add(menu);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("TruckSelector", "Truck");
             /*}
             catch
             {

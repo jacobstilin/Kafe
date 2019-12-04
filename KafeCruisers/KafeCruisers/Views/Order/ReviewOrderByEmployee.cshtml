@@ -3,7 +3,7 @@
     ViewBag.Title = "ReviewOrderByEmployee";
 }
 
-<h2>ReviewOrderByEmployee</h2>
+<h2>Review Order By Employee</h2>
 
 <div>
 
@@ -62,12 +62,12 @@
         </dd>
 
         <dt>
-            <h2>Price</h2>
+            Price
         </dt>
 
         <dd>
-            @{ double? price = ViewBag.price; }
-            @Html.DisplayFor(model => price)
+            @{ var priceString = string.Format("{0:0.00}", ViewBag.price); }
+            $@Html.DisplayFor(model => priceString)
         </dd>
 
         @{

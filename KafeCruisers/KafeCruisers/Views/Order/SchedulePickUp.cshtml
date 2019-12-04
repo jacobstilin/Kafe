@@ -3,7 +3,17 @@
 @{
     ViewBag.Title = "SchedulePickUp";
 }
+<style>
+    input.button {
+        width: 100%;
+        max-width: 345px;
+    }
 
+    input.ui-timepicker-input {
+        width: 100%;
+        max-width: 345px;
+    }
+</style>
 <h2>Choose Pick Up Time</h2>
 
 
@@ -31,12 +41,12 @@
                 Select a time:
 
                 <div>
-                    @Html.EditorFor(modelItem => Model.FillTime, new { htmlAttributes = new { @Value = "", @class = "ui-timepicker-input", @id = "disableTimeRangesExample" } })
+                    @Html.EditorFor(modelItem => Model.FillTime, new { htmlAttributes = new { @Value = "", @class = "ui-timepicker-input", @id = "timePicker" } })
                 </div>
-
+                <br />
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Submit" class="btn btn-default" />
+                        <input type="submit" value="Submit" class="button" />
                     </div>
                 </div>
 
@@ -62,11 +72,13 @@
 
     $(function () {
 
-        $('#disableTimeRangesExample').timepicker({
+        $('#timePicker').timepicker({
             'step': 1,
             'minTime': open, 
             'maxTime': close,
-            'disableTimeRanges': avaibs
+            'disableTimeRanges': avaibs,
+            'disableTextInput': true,
+            'orientation': 'rb'
                 
             
         })

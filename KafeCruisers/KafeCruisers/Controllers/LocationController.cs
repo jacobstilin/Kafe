@@ -54,8 +54,11 @@ namespace KafeCruisers.Controllers
         {
             Location deleteLocation = db.Locations.FirstOrDefault(l => l.LocationId == id);
             Truck locationTruck = db.Trucks.FirstOrDefault(t => t.LocationId == id);
-            locationTruck.LocationId = null;
-            db.SaveChanges();
+            try {
+                locationTruck.LocationId = null;
+                db.SaveChanges();
+            }
+            catch { }
             db.Locations.Remove(deleteLocation);
             db.SaveChanges();
             return RedirectToAction("LocationsList");
