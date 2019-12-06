@@ -4,6 +4,14 @@
     ViewBag.Title = "ViewTruckOrders";
 }
 
+<style>
+    a.button {
+        padding: 0em 1.2em;
+    }
+
+    
+</style>
+
 <h2>View Truck Orders</h2>
 
 
@@ -46,10 +54,10 @@
         $@Html.DisplayFor(model => priceString)
     </td>
     <td>
-        @Html.ActionLink("View Order", "ViewOrderItems", new { id = item.OrderId })
+        @Html.ActionLink("View Order", "ViewOrderItems", new { id = item.OrderId }, new { @class = "button" })
     </td>
     <td>
-        @Html.ActionLink("Order Filled", "OrderFilled", "Order", new { id = item.OrderId }, null)
+        @Html.ActionLink("Order Filled", "OrderFilled", "Order", new { id = item.OrderId }, new { @class = "button" })
     </td>
 </tr>
 }

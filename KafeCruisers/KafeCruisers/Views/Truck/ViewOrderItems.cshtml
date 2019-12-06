@@ -28,14 +28,14 @@
                 $@Html.DisplayFor(model => priceString)
             </td>
             <td>
-                @Html.ActionLink("View Details", "ReviewSelectedItemByEmployee", "Order", new { id = item.OrderItemId }, null)
+                @Html.ActionLink("View Details", "ReviewSelectedItemByEmployee", "Order", new { id = item.OrderItemId }, new { @class = "button" })
 
             </td>
         </tr>
     }
 
     <p>
-        @Html.ActionLink("Back To Orders List", "ViewTruckOrders", "Truck", new { id = ViewBag.Return }, null)
+        @Html.ActionLink("Back To Orders List", "ViewTruckOrders", "Truck", new { id = ViewBag.Return }, new { @class = "button" })
     </p>
 
 </table>

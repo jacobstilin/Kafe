@@ -720,7 +720,6 @@ namespace KafeCruisers.Controllers
             };
             var service = new ChargeService();
             Charge charge = service.Create(options);
-
             var model = new Cart();
             model.ChargeId = charge.Id;
 

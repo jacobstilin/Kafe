@@ -3,6 +3,27 @@
     ViewBag.Title = "ReviewOrderByEmployee";
 }
 
+    <style>
+        dl {
+            overflow: auto;
+        }
+
+        dt {
+            display: inline-block;
+            width: 37%;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        dd {
+            width: 50%;
+            display: inline-block;
+            white-space: nowrap;
+            margin-left: 40px;
+        }
+      
+    </style>
+
 <h2>Review Order By Employee</h2>
 
 <div>
@@ -267,5 +288,5 @@
 </div>
 
 <p>
-    @Html.ActionLink("Back To Order", "ViewOrderItems", "Truck", new { id = Model.OrderId }, null)
+    @Html.ActionLink("Back To Order", "ViewOrderItems", "Truck", new { id = Model.OrderId }, new { @class = "button" })
 </p>
