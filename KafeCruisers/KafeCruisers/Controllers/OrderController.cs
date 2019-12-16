@@ -44,6 +44,7 @@ namespace KafeCruisers.Controllers
             newOrder.TruckId = customer.OrderTruckId;
             newOrder.FillTime = DateTime.Now;
             newOrder.StartTime = DateTime.Now;
+            newOrder.Status = 1;
             db.Orders.Add(newOrder);
             db.SaveChanges();
             customer.CurrentOrderId = newOrder.OrderId;
@@ -100,7 +101,9 @@ namespace KafeCruisers.Controllers
                 newOrderItem.Decaf = orderItem.Decaf;
                 newOrderItem.Temperature = orderItem.Temperature;
                 newOrderItem.WhippedCream = orderItem.WhippedCream;
-                
+
+                Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
+                currentOrder.Status = 2;
 
                 db.SaveChanges();
 
@@ -607,9 +610,13 @@ namespace KafeCruisers.Controllers
             Models.Customer currentCustomer = GetLoggedInCustomer();
             Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             Truck truck = db.Trucks.FirstOrDefault(t => t.TruckId == currentOrder.TruckId);
-            double orderMinimumTime = GetOrderFillDuration(currentOrder) + 5;  
+            double orderMinimumTime = GetOrderFillDuration(currentOrder) + 5;
 
             // Convert truck open time to the time on the current day
+
+            DateTime closedTime = (DateTime.Now);
+            DateTime closedNewTime = closedTime.AddMinutes(orderMinimumTime);
+            ViewBag.TruckOpens = TimeConverter(closedNewTime);
 
             if (DateTime.Now.TimeOfDay > truck.StartTime.TimeOfDay)
             {
@@ -666,6 +673,7 @@ namespace KafeCruisers.Controllers
             double orderMinimumTime = GetOrderFillDuration(setTimeOrder);
             setTimeOrder.FillTime = order.FillTime;
             setTimeOrder.StartTime = order.FillTime.AddMinutes(orderMinimumTime * -1);
+            setTimeOrder.Status = 3;
             db.SaveChanges();
             return RedirectToAction("FinalOrderReview");
         }
@@ -782,16 +790,31 @@ namespace KafeCruisers.Controllers
             Models.Customer currentCustomer = GetLoggedInCustomer();
             Models.Order currentOrder = db.Orders.FirstOrDefault(o => o.OrderId == currentCustomer.CurrentOrderId);
             currentOrder.UniqueId = (currentOrder.OrderId % 1000);
+            currentOrder.Status = 4;
             db.SaveChanges();
 
             return View(currentOrder);
         }
 
+        public ActionResult ResumePastOrder(int id)
+        {
+            Models.Customer customer = GetLoggedInCustomer();
+            customer.CurrentOrderId = id;
+            db.SaveChanges();
+
+            return RedirectToAction("ResumeOrder");
+        }
 
         public ActionResult ResumeOrder()
         {
             Models.Customer customer = GetLoggedInCustomer();
             Models.Order order = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
+
+            if(order.StartTime < DateTime.Now) // if they try to schedule a time after the start time of the order? should work
+            {
+                order.Status = 2;
+                db.SaveChanges();
+            }
 
             List<Models.OrderItem> incompleteOrders = db.OrderItems.Where(o => o.Size == null).ToList();
             foreach (Models.OrderItem item in incompleteOrders)
@@ -800,15 +823,32 @@ namespace KafeCruisers.Controllers
                 db.SaveChanges();
             }
 
-            if(order.UniqueId != null)
+            if (order.Status == 1)
             {
+                return RedirectToAction("AdditionalDrink");
+            }
+
+            if (order.Status == 2)
+            {
+                return RedirectToAction("ReviewOrderBeforeCheckout");
+            }
+
+            if (order.Status == 3)
+            {
+                return RedirectToAction("FinalOrderReview"); // take customer to payment
+            }
+
+            // If order has no drinks, directs to start order or additional drink using status 1
+            // If order has drinks, directs to the order review/add drinks menu
+            // If order is scheduled, determines whether order must be rescheduled and directs accordingly
+            // If order is paid, goes to unique id
+            // If order is filled, resume order is not present. 
+
+            
                 return RedirectToAction("UniqueIdScreen");
-            }
-            if(order.FillTime >= DateTime.Now)
-            {
-                return RedirectToAction("FinalOrderReview");
-            }
-            return RedirectToAction("ReviewOrderBeforeCheckout");
+            
+            
+            
         }
 
 
@@ -827,19 +867,28 @@ namespace KafeCruisers.Controllers
         {
             Models.Order filledOrder = db.Orders.FirstOrDefault(o => o.OrderId == id);
             try {
-                Models.Customer customer = db.Customers.FirstOrDefault(c => c.CurrentOrderId == id);
-                customer.CurrentOrderId = null;
+                filledOrder.Status = 5;
+                var now = DateTime.Now;
+                filledOrder.FillTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
             }
             catch
             {
                 
             }
-            filledOrder.UniqueId = -1;
             db.SaveChanges();
             return RedirectToAction("ViewTruckOrders", "Truck", new { id = filledOrder.TruckId });
         }
 
+        public ActionResult ViewMyOrders()
+        {
+            Models.Customer customer = GetLoggedInCustomer();
+            List<Models.Order> currentOrders = db.Orders.Where(o => o.CustomerId == customer.CustomerId && o.Status != 5).ToList();
+            List<Models.Order> pastOrders = db.Orders.Where(o => o.CustomerId == customer.CustomerId && o.Status == 5).ToList();
+            ViewBag.CurrentOrders = currentOrders;
+            ViewBag.PastOrders = pastOrders;
 
+            return View();
+        }
 
 
 

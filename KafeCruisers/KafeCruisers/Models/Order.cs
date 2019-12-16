@@ -22,8 +22,8 @@ namespace KafeCruisers.Models
         public DateTime FillTime { get; set; }
 
         [Display(Name = "Price")]
-        public double? OrderPrice { get; set;
-        }
+        public double? OrderPrice { get; set; }
+
         [ForeignKey("Truck")]
         public int? TruckId { get; set; }
         public Truck Truck { get; set; }
@@ -33,5 +33,7 @@ namespace KafeCruisers.Models
         public Customer Customer { get; set; }
         
         public int? Duration { get; set; }
+
+        public int? Status { get; set; }
     }
 }

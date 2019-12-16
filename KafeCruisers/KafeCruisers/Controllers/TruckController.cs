@@ -148,7 +148,7 @@ namespace KafeCruisers.Controllers
 
         public ActionResult ViewTruckOrders(int id)
         {
-            List<Order> truckOrders = db.Orders.Where(o => o.TruckId == id && o.UniqueId != null && o.UniqueId != -1).ToList();
+            List<Order> truckOrders = db.Orders.Where(o => o.TruckId == id && o.Status == 4).ToList();
             List<Order> sortedList = truckOrders.OrderBy(o => o.UniqueId).ToList();
             return View(sortedList);
         }

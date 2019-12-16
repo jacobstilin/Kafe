@@ -317,6 +317,7 @@
     <Content Include="Views\Order\SetUpStripe.cshtml" />
     <Content Include="Views\Order\UniqueIdScreen.cshtml" />
     <Content Include="Views\Menu\ViewTruckMenu.cshtml" />
+    <Content Include="Views\Order\ViewMyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

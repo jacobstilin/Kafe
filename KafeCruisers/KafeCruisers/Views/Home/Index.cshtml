@@ -6,10 +6,12 @@
     a.button {
         width: 100%;
     }
+
     img.logo {
         width: 100%;
-  height: auto;
+        height: auto;
     }
+
     a#loginLink {
         color: white;
     }
@@ -42,6 +44,9 @@ else if (ViewBag.role == "Customer")
     }
     <div>
         @Html.ActionLink("Place Order", "CustomerTruckSelector", "Truck", null, new { @class = "button" })
+    </div>
+    <div>
+        @Html.ActionLink("View My Orders", "ViewMyOrders", "Order", null, new { @class = "button" })
     </div>
 }
 

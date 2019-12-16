@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "ViewMyOrders";
+}
+
+<style>
+    a.button {
+        padding: 0em 1.2em;
+    }
+    th {
+        width: 25%;
+    }
+    td {
+        width: 25%;
+    }
+</style>
+
+
+<h2>My Orders</h2>
+
+@{var currentOrders = ViewBag.CurrentOrders;
+    if (currentOrders.Count != 0)
+    {
+
+        <br />
+        <h3>Current Orders</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Order Id
+                </th>
+                <th>
+                    Pick Up Time
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in ViewBag.CurrentOrders)
+            {
+                <tr>
+                    <td>
+                        @{
+                            int? unique = item.UniqueId;
+                        }
+                        @Html.DisplayFor(modelItem => unique)
+                    </td>
+                    <td>
+                        @{
+                            string fillString = item.FillTime.ToString("h:mm tt");
+                        }
+                        @Html.DisplayFor(modelItem => fillString)
+                    </td>
+                    <td>
+                        @{ var priceString = string.Format("{0:0.00}", item.OrderPrice); }
+                        $@Html.DisplayFor(model => priceString)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Resume Order", "ResumePastOrder", "Order", new { id = item.OrderId }, new { @class = "button" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+    else
+    {
+        <h3>No current orders found. </h3>
+        @Html.ActionLink("Place Order", "StartOrder", "Order", new { @class = "button" })
+    }
+}
+<br />
+
+
+@{
+    var pastOrders = ViewBag.PastOrders;
+    if (pastOrders.Count != 0)
+    {
+
+
+        <h3>Past Orders</h3>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Order Id
+                </th>
+                <th>
+                    Pick Up Time
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in ViewBag.PastOrders)
+            {
+                <tr>
+                    <td>
+                        @{
+                            int? unique = item.UniqueId;
+                        }
+                        @Html.DisplayFor(modelItem => unique)
+                    </td>
+                    <td>
+                        @{
+                            string fillString = item.FillTime.ToString("h:mm tt");
+                        }
+                        @Html.DisplayFor(modelItem => fillString)
+                    </td>
+                    <td>
+                        @{ var priceString = string.Format("{0:0.00}", item.OrderPrice); }
+                        $@Html.DisplayFor(model => priceString)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+
+}

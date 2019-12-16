@@ -39,7 +39,8 @@ namespace KafeCruisers.Controllers
             if (isCustomer())
             {
                 Customer customer = GetLoggedInCustomer();
-                if (customer.CurrentOrderId != null)
+                Order currentCustomerOrder = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
+                if (customer.CurrentOrderId != null && currentCustomerOrder.Status != 5)
                 {
                     ViewBag.Resume = true;
                 }
