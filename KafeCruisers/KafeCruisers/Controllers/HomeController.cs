@@ -40,10 +40,14 @@ namespace KafeCruisers.Controllers
             {
                 Customer customer = GetLoggedInCustomer();
                 Order currentCustomerOrder = db.Orders.FirstOrDefault(o => o.OrderId == customer.CurrentOrderId);
-                if (customer.CurrentOrderId != null && currentCustomerOrder.Status != 5)
+                try
                 {
-                    ViewBag.Resume = true;
+                    if (customer.CurrentOrderId != null && currentCustomerOrder.Status != 5)
+                    {
+                        ViewBag.Resume = true;
+                    }
                 }
+                catch { }
                 ViewBag.role = "Customer";
             }
             else if(!isCustomer() && !isAppManager())

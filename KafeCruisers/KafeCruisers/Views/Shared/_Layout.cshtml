@@ -15,7 +15,7 @@
 
     * {
         font-family: 'Open Sans', sans-serif;
-        color: white;
+        
     }
 
     div.navbar-inverse {
@@ -25,7 +25,11 @@
 
     body, html {
         margin: 0;
-        background-color: #0095ff;
+        background-color: #57b9ff;
+    }
+
+    td {
+        font-size: 16px;
     }
 
      a.button {
@@ -108,9 +112,8 @@
             {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        
                         <li>@Html.ActionLink("Order", "CustomerTruckSelector", "Truck")</li>
-                       
+                        <li>@Html.ActionLink("My Orders", "ViewMyOrders", "Order")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

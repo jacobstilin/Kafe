@@ -50,6 +50,10 @@
                     <td>
                         @{
                             string fillString = item.FillTime.ToString("h:mm tt");
+                            if (item.Status != 4)
+                            {
+                                fillString = "";
+                            }
                         }
                         @Html.DisplayFor(modelItem => fillString)
                     </td>
@@ -69,7 +73,7 @@
     else
     {
         <h3>No current orders found. </h3>
-        @Html.ActionLink("Place Order", "StartOrder", "Order", new { @class = "button" })
+        @Html.ActionLink("Place Order", "CustomerTruckSelector", "Truck", null, new { @class = "button" })
     }
 }
 <br />
