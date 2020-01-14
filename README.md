@@ -16,3 +16,5 @@ On the customer side, customers are able to place orders, view current and past 
 Customers are able to view a list of current orders that have not been completed or picked up yet. At any time they can resume these orders or cancel them. They can also view a list of past orders and all relevant information. If need be they can simply select Resume Order and continue on with the last order they were working on. 
 
 This application was created by and is maintained by Jacob Stilin. Feel free to contact me with any questions or comments!
+
+/Images/KCipadLogin.PNG
