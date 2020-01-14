@@ -17,4 +17,4 @@ Customers are able to view a list of current orders that have not been completed
 
 This application was created by and is maintained by Jacob Stilin. Feel free to contact me with any questions or comments!
 
-/Images/KCipadLogin.PNG
+![alt text](/Images/KCipadLogin.PNG)
