@@ -18,3 +18,27 @@ Customers are able to view a list of current orders that have not been completed
 This application was created by and is maintained by Jacob Stilin. Feel free to contact me with any questions or comments!
 
 ![alt text](/Images/KCipadLogin.PNG)
+
+![alt text](/Images/KCtruckOrders.PNG)
+
+![alt text](/Images/KCemployeeTruckMenu.PNG)
+
+![alt text](/Images/KCemployeeMenu.PNG)
+
+![alt text](/Images/KClocationMenu.PNG)
+
+![alt text](/Images/KCcustomerMain.PNG)
+
+![alt text](/Images/KCmyOrders.PNG)
+
+![alt text](/Images/KCtruckSelector.PNG)
+
+![alt text](/Images/KCdrinkOptions.PNG)
+
+![alt text](/Images/KCreviewDrink.PNG)
+
+![alt text](/Images/KCreviewOrder.PNG)
+
+![alt text](/Images/KCtimePicker.PNG)
+
+![alt text](/Images/KCuniqueId.PNG)
